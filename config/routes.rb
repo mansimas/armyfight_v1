@@ -8,8 +8,7 @@ Rails.application.routes.draw do
 
   get 'home' => 'home#index'
   get 'simulator' => 'home#armyfight'
-  get 'tutorial' => 'home#tutorial'
-  get 'events' => 'home#events'
+  get 'about' => 'home#about'
   post 'destroy_armies' => 'fights#destroy_armies'
   get 'all_fights' => 'fights#all_fights'
   get "play/:id" => 'fights#play'

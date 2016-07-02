@@ -8,9 +8,8 @@ class HomeController < ApplicationController
   def armyfight
   end
 
-  def tutorial
+  def about
+  	$redis.set 'alfa', 'beta'
   end
 
-  def events
-  end
 end

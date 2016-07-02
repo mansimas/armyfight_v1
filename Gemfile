@@ -21,3 +21,4 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'heroku'
 gem 'rails_12factor', group: :production
+gem 'redis'

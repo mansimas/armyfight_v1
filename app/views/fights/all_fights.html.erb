@@ -1,5 +1,8 @@
 <%= render 'layouts/navigation' %>
 <div class='col-md-offset-2 col-md-8'>
+
+<%= $redis.get 'alfa' %>
+
 <%= will_paginate @fights, renderer: BootstrapPagination::Rails %>
 <h1 class='text-center'>All Fights</h1>
 <%= link_to 'New Fight', new_fight_path, :class => 'btn btn-success' %>
