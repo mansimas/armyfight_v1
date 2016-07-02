@@ -1,0 +1,66 @@
+<%= render 'layouts/navigation' %>
+<div class="container">
+<div class="callout large primary">
+	<div class="row column text-center">
+		<h1>Explanation about this tool</h1>
+	</div>
+</div>
+<div class="row medium-8 large-7 columns">
+	<div class="blog-post text-center">
+		<h3>In-game Meanings</h3>
+		<div style="text-align: left">
+			Example: you want to have an army 5x10, totally 50 units. In middle of screen, at X=100 and Y=20<br>
+			C -> Columns. You should input 5<br>
+			R -> Rows. You should input 10<br>
+			X -> Horizontal army placement from left. You should input 100<br>
+			Y -> Vertical army placement from top. You should input 20<br><br>
+			
+			To start the battle, click blue button "Attack".<br>
+			After you have started the fight, if you want to add extra armies, click blue button "Add army".<br>
+			If you want at full screen, click "Max screen". If you want to full window size, click "F11" and then "Max screen"<br>
+			If you paused, you can watch frame-by-frame by clicking on "Add frame"<br>
+			The third number which allways increases is frames<br>
+			The fourth number is the attackers (red) unit count.<br>
+			The fifth number is the defenders (blue) unit count<br>
+		</div>
+	</div>
+</div>
+
+<div class="row medium-8 large-7 columns">
+	<div class="blog-post text-center">
+		<h3>Button meanings</h3>
+		<%= image_tag('explanation.png', :class => 'thumbnail', :size => "1000x600") %>
+	</div>
+</div><br><br><br><br>
+
+<div class="row medium-8 large-7 columns">
+	<div class="blog-post text-center">
+		<h3>Explanation how it works</h3>
+		<%= image_tag('af2.png', :class => 'thumbnail', :size => "1000x600") %>
+		<div style="text-align:left">
+			<div>
+				First screen you see is attacker's and defender's army options.
+				Attacker army and defender army is not the same strength army. Attacker units have health, damage and unit type. Defender army have health, defence againts infantry, horseman and archer. When they fight, attacker Unit does "Damage" to defender unit's health, no matter what unit type it have. Defender unit checks, if he is attacking Unit type "Archer", he does damage "Defence archer" and damaging by that points enemy health.
+			</div>
+			<div>
+			    You can click "Edit Unit Stats" and see all Units available now. As it is in game "Tribal Wars 2". Here you can change their stats. If the fight is in proccess and you clicked "proceed" to add more armies, the new stats will appear only for newly created army, old armies will have old stats. 
+			</div>
+			<div>
+				Unit Health is always the same. But Unit damage and defence is randomized by 20%. Every unit is unique by damage. When you start the fight, you can click on any unit in field and see it's stats. The stats will never change after start. So if some unit have maximum possible damage, it will kill most enemy units. You can also see killed enemies count when clicking on any unit in field.
+			</div>
+			<div>
+				You can place armies at any direction. But for now works best if armies are fighting on X-axis. If armies are fighting on Y axis, works slower, on slow computers can crash. If you accidently put too many numbers on Columns or Rows, the army size will increase dramatically and on slow computer will crash. Just need to restart website and try again more carefully.
+			</div>
+			<div>
+				
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+
+	</div>
+</div>
+</div>

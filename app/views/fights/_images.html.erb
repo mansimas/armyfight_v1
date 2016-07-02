@@ -1,0 +1,41 @@
+<div style="display:none;">
+    <%= image_tag('spear.png', :id => 'spear', :size => "12x12") %>
+    <%= image_tag('axe.png', :id => 'axe', :size => "12x12") %>
+    <%= image_tag('bow.png', :id => 'bow', :size => "12x12") %>
+    <%= image_tag('mounted.png', :id => 'mounted', :size => "12x12") %>
+    <%= image_tag('heavy.png', :id => 'heavy', :size => "12x12") %>
+    <%= image_tag('light.png', :id => 'light', :size => "12x12") %>
+    <%= image_tag('movement_blue2.png', :id => 'sword_m_b', :size => "510x240") %>
+    <%= image_tag('movement_red2.png', :id => 'sword_m_r', :size => "510x240") %>
+    <%= image_tag('hitting_red2.png', :id => 'sword_h_r', :size => "510x240") %>
+    <%= image_tag('hitting_blue2.png', :id => 'sword_h_b', :size => "510x240") %>
+    <%= image_tag('dieing_red2.png', :id => 'sword_d_r', :size => "510x240") %>
+    <%= image_tag('dieing_blue2.png', :id => 'sword_d_b', :size => "510x240") %>
+    <%= image_tag('ground2.jpg', :id => 'ground', :size => "100x100") %>
+
+    <span ng-switch on="images_to_show">
+        <%= image_tag('movement_blue2.png', :id => 'sword_m_b2', :size => "510x240", 'ng-switch-when' => '2') %>
+        <%= image_tag('movement_red2.png', :id => 'sword_m_r2', :size => "510x240", 'ng-switch-when' => '2') %>
+        <%= image_tag('hitting_red2.png', :id => 'sword_h_r2', :size => "510x240", 'ng-switch-when' => '2') %>
+        <%= image_tag('hitting_blue2.png', :id => 'sword_h_b2', :size => "510x240", 'ng-switch-when' => '2') %>
+        <%= image_tag('dieing_red2.png', :id => 'sword_d_r2', :size => "510x240", 'ng-switch-when' => '2') %>
+        <%= image_tag('dieing_blue2.png', :id => 'sword_d_b2', :size => "510x240", 'ng-switch-when' => '2') %>
+        <%= image_tag('ground2.jpg', :id => 'ground2', :size => "100x100", 'ng-switch-when' => '2') %>
+
+        <%= image_tag('movement_blue1.png', :id => 'sword_m_b1', :size => "1785x788", 'ng-switch-when' => '1') %>
+        <%= image_tag('movement_red1.png', :id => 'sword_m_r1', :size => "1785x788", 'ng-switch-when' => '1') %>
+        <%= image_tag('hitting_red1.png', :id => 'sword_h_r1', :size => "1785x788", 'ng-switch-when' => '1') %>
+        <%= image_tag('hitting_blue1.png', :id => 'sword_h_b1', :size => "1785x788", 'ng-switch-when' => '1') %>
+        <%= image_tag('dieing_red1.png', :id => 'sword_d_r1', :size => "1785x788", 'ng-switch-when' => '1') %>
+        <%= image_tag('dieing_blue1.png', :id => 'sword_d_b1', :size => "1785x788", 'ng-switch-when' => '1') %>
+        <%= image_tag('ground1.jpg', :id => 'ground1', :size => "250x250", 'ng-switch-when' => '1') %>
+
+        <%= image_tag('movement_blue.png', :id => 'sword_m_b0', :size => "7140x3152", 'ng-switch-when' => '0') %>
+        <%= image_tag('movement_red.png', :id => 'sword_m_r0', :size => "7140x3152", 'ng-switch-when' => '0') %>
+        <%= image_tag('hitting_red.png', :id => 'sword_h_r0', :size => "7140x3152", 'ng-switch-when' => '0') %>
+        <%= image_tag('hitting_blue.png', :id => 'sword_h_b0', :size => "7140x3152", 'ng-switch-when' => '0') %>
+        <%= image_tag('dieing_red1.png', :id => 'sword_d_r0', :size => "7140x3152", 'ng-switch-when' => '0') %>
+        <%= image_tag('dieing_blue1.png', :id => 'sword_d_b0', :size => "7140x3152", 'ng-switch-when' => '0') %>
+        <%= image_tag('ground.jpg', :id => 'ground0', :size => "1000x1000", 'ng-switch-when' => '0') %>
+    </span>
+</div>

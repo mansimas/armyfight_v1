@@ -1,0 +1,39 @@
+<%= render 'layouts/navigation' %>
+<div class='col-md-offset-2 col-md-8'>
+<%= will_paginate @fights, renderer: BootstrapPagination::Rails %>
+<h1 class='text-center'>All Fights</h1>
+<%= link_to 'New Fight', new_fight_path, :class => 'btn btn-success' %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>User</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th>Watched</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fights.each do |fight| %>
+      <tr>
+        <td><%= fight.id %></td>
+        <td><%= fight.name.truncate(30) %></td>
+        <td><%= fight.user.nickname %></td>
+        <td><%= fight.created_at.strftime("%Y-%m-%d %Hh") %></td>
+        <td><%= fight.updated_at.strftime("%Y-%m-%d %Hh") %></td>
+        <td><%= fight.watched %></td>
+        <td><a href="/play/<%= fight.id %>"  class='btn btn-primary'>Watch</a></td>
+        <% if current_user && current_user.nickname == 'mansim' %>
+          <td><%= link_to 'Edit', edit_fight_path(fight), :class => 'btn btn-primary' %></td>
+          <td><%= link_to 'Destroy', fight, method: :delete, :class => 'btn btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+</div>

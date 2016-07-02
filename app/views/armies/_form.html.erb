@@ -1,0 +1,85 @@
+<%= form_for(@army) do |f| %>
+  <% if @army.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@army.errors.count, "error") %> prohibited this army from being saved:</h2>
+
+      <ul>
+      <% @army.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fight_id %><br>
+    <%= f.number_field :fight_id %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_name %><br>
+    <%= f.text_field :unit_name %>
+  </div>
+  <div class="field">
+    <%= f.label :hp_from %><br>
+    <%= f.number_field :hp_from %>
+  </div>
+  <div class="field">
+    <%= f.label :hp_to %><br>
+    <%= f.number_field :hp_to %>
+  </div>
+  <div class="field">
+    <%= f.label :dmg_from %><br>
+    <%= f.number_field :dmg_from %>
+  </div>
+  <div class="field">
+    <%= f.label :dmg_to %><br>
+    <%= f.number_field :dmg_to %>
+  </div>
+  <div class="field">
+    <%= f.label :def_inf_from %><br>
+    <%= f.number_field :def_inf_from %>
+  </div>
+  <div class="field">
+    <%= f.label :def_inf_to %><br>
+    <%= f.number_field :def_inf_to %>
+  </div>
+  <div class="field">
+    <%= f.label :def_hors_from %><br>
+    <%= f.number_field :def_hors_from %>
+  </div>
+  <div class="field">
+    <%= f.label :def_hors_to %><br>
+    <%= f.number_field :def_hors_to %>
+  </div>
+  <div class="field">
+    <%= f.label :def_arch_from %><br>
+    <%= f.number_field :def_arch_from %>
+  </div>
+  <div class="field">
+    <%= f.label :def_arch_to %><br>
+    <%= f.number_field :def_arch_to %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_type %><br>
+    <%= f.text_field :unit_type %>
+  </div>
+  <div class="field">
+    <%= f.label :columns %><br>
+    <%= f.number_field :columns %>
+  </div>
+  <div class="field">
+    <%= f.label :rows %><br>
+    <%= f.number_field :rows %>
+  </div>
+  <div class="field">
+    <%= f.label :x_pos %><br>
+    <%= f.number_field :x_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :y_pos %><br>
+    <%= f.number_field :y_pos %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

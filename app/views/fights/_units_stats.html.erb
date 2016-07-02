@@ -1,0 +1,108 @@
+<div class="col-md-offset-3 col-md-4" style='left: -8px; position:absolute; background-color: rgba(33, 153, 232, 0.8); color:white;' data-ng-show="edit_army_view(1)">
+
+    <button class="btn btn-primary" data-ng-click='army_view = 1'>Stats page</button>
+    <button class="btn btn-primary" data-ng-click='army_view = 2'>Targets page</button>
+    <button class="btn btn-primary" data-ng-click='army_view = 3'>Formations page</button>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Army Units: </label>
+            <strong><div data-ng-bind="unit_for_stats_change.stats.unit" style='display:inline; float:right;'></div></strong>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Army Type: </label>
+            <strong><div data-ng-bind="unit_for_stats_change.stats.type" style='display:inline; float:right;'></div></strong>
+        </div>
+    </div><br>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> X position: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.x" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Y position: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.y" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label" style='float:right; color:yellow;'><strong> Range from: </strong></label>
+       
+        </div>
+        <div class="col-md-6 columns" >
+            <label class="form-control-label" style='float:right; color:yellow;'><strong> Range To: </strong></label>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Health: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.hp_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Health: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.hp_to" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Attack: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.dmg_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Attack: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.dmg_to" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Def horse: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_hors_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Def horse: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_hors_to" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Def archer: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_arch_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Def archer: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_arch_to" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Def infantry: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_inf_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Def infantry: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_inf_to" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <button class="btn btn-success" data-ng-click='center_army()'>Center this army</button>
+            <button class="btn btn-success" data-ng-click='deselect_army()'>Deselect this army</button>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> Speed: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.speed" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+
+    <br>
+
+</div>

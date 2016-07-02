@@ -1,0 +1,84 @@
+<div style="position:absolute; margin-left: 50px; margin-top: 10px; background-color: rgba(150, 150, 40, 0.9);">
+
+    
+    <h4 style='margin-left:10px;'>
+        <label class='label-form-control'> Attacker army</label>
+        <span><button style="margin-left: 15px;" data-ng-click="add_army('ally')" class='btn btn-danger'>Add</button></span>
+
+          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(1)">Hide Army stats</button>
+          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(2)">Hide Army stats</button>
+          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(3)">Hide Army stats</button>
+          <button class='btn btn-success' data-ng-click="army_view = 1" data-ng-show="edit_army_view(0)">Show Army stats</button>
+    </h4>
+
+    <table>
+        <tr>
+            <td style="width: 130px; text-align: center">Unit</td>
+            <td style="width: 50px;">Col</td>
+            <td style="width: 50px;">Row</td>
+            <td style="width: 50px;">X</td>
+            <td style="width: 50px;">Y</td>
+        </tr>
+    </table>
+    <div data-ng-repeat="(key, value) in formations.ally">
+        <table>
+        <tr>
+            <td>
+                <select data-ng-model="value.unit" data-ng-change="change_stats(key, 'ally')" style="width: 130px;" class='form-control'>
+                    <option value="spear">Spearman</option>
+                    <option value="sword">Swordsman</option>
+                    <option value="axe">Axemen</option>
+                    <option value="bow">Bowman</option>
+                    <option value="light">Light cavalry</option>
+                    <option value="mounted">Mounted archer</option>
+                    <option value="heavy">Heavy cavalry</option>
+                </select>
+            </td>
+            <td><input type="text" class='form-control' data-ng-model="value.column" data-ng-change="change_stats(key, 'ally')" style="width: 50px;"></td>
+            <td><input type="text" class='form-control' data-ng-model="value.row" data-ng-change="change_stats(key, 'ally')" style="width: 50px;"></td>
+            <td><input type="text" class='form-control' data-ng-model="value.x" data-ng-change="change_stats(key, 'ally')" style="width: 50px;"></td>
+            <td><input type="text" class='form-control' data-ng-model="value.y" data-ng-change="change_stats(key, 'ally')" style="width: 50px;"></td>
+            <td><a data-ng-click="remove(key, 'ally') " style='color:#7E7E7E'><i class="fa fa-trash fa-2x"></i></a></td>
+            <td><button data-ng-class="find_class(key, 'ally')" data-ng-click="change_unit_stats('ally', key)">Select</button></td>
+        </tr>
+        </table>
+    </div>
+
+    <h4 style='margin-left:10px;'>
+        <label class='label-form-control'> Defender army</label>
+        <span><button style="margin-left: 15px;" data-ng-click="add_army('enemy')" class='btn btn-primary'>Add</button></span>
+    	<button class="btn btn-default" data-ng-click="stats_visible = !stats_visible" style="float:right">Edit Unit Stats</button>
+    </h4>
+    <table>
+        <tr>
+            <td style="width: 130px; text-align: center">Unit</td>
+            <td style="width: 50px;">Col</td>
+            <td style="width: 50px;">Row</td>
+            <td style="width: 50px;">X</td>
+            <td style="width: 50px;">Y</td>
+        </tr>
+    </table>
+    <div data-ng-repeat="(key, value) in formations.ally">
+        <table>
+            <tr>
+                <td>
+                    <select data-ng-model="value.unit" class='form-control' data-ng-change="change_stats(key, 'enemy')" style="width: 130px;">
+                        <option value="spear">Spearman</option>
+                        <option value="sword">Swordsman</option>
+                        <option value="axe">Axemen</option>
+                        <option value="bow">Bowman</option>
+                        <option value="light">Light cavalry</option>
+                        <option value="mounted">Mounted archer</option>
+                        <option value="heavy">Heavy cavalry</option>
+                    </select>
+                </td>
+                <td><input type="text" class='form-control' data-ng-model="value.column" data-ng-change="change_stats(key, 'enemy')" style="width: 50px;"></td>
+                <td><input type="text" class='form-control' data-ng-model="value.row" data-ng-change="change_stats(key, 'enemy')" style="width: 50px;"></td>
+                <td><input type="text" class='form-control' data-ng-model="value.x" data-ng-change="change_stats(key, 'enemy')" style="width: 50px;"></td>
+                <td><input type="text" class='form-control' data-ng-model="value.y" data-ng-change="change_stats(key, 'enemy')" style="width: 50px;"></td>
+                <td><a data-ng-click="remove(key, 'enemy') " style='color:#7E7E7E'><i class="fa fa-trash fa-2x"></i></a></td>
+                <td><button data-ng-class="find_class(key, 'enemy')" data-ng-click="change_unit_stats('enemy', key)">Select</button></td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="col-md-offset-3 col-md-4" style='left: -8px; max-height: 300px; overflow: scroll; position:absolute; background-color: rgba(223, 153, 32, 0.8); color:white;' 
+data-ng-show="edit_army_view(2)">
+
+    <button class="btn btn-primary" data-ng-click='army_view = 1'>Stats page</button>
+    <button class="btn btn-primary" data-ng-click='army_view = 2'>Targets page</button>
+    <button class="btn btn-primary" data-ng-click='army_view = 3'>Formations page</button>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-3">
+            <label>X</label>
+        </div>
+        <div class="col-md-3">
+            <label>Y</label>
+        </div>
+        <div class="col-md-3">
+            <label>time</label>
+        </div>
+    </div>
+
+    <div data-ng-repeat="(key, value) in unit_for_stats_change.targets">
+        <div class="form-group row">
+            <div class="col-md-3">
+                <input type="text" data-ng-model="value.x" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" data-ng-model="value.y" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" data-ng-model="value.time" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-danger" data-ng-click="remove_target(key)">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12">
+        <button class="btn btn-success" data-ng-click='deselect_army()'>Deselect this army</button> 
+        <button class="btn btn-success" data-ng-click='center_army()'>Center this army</button>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12">
+            <button class="btn btn-success" data-ng-click='enable_targeting()'>Add target point</button>
+        </div>
+    </div>
+
+    <br>
+
+</div>

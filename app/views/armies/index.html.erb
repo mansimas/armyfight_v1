@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Armies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fight</th>
+      <th>Unit name</th>
+      <th>Hp from</th>
+      <th>Hp to</th>
+      <th>Dmg from</th>
+      <th>Dmg to</th>
+      <th>Def inf from</th>
+      <th>Def inf to</th>
+      <th>Def hors from</th>
+      <th>Def hors to</th>
+      <th>Def arch from</th>
+      <th>Def arch to</th>
+      <th>Unit type</th>
+      <th>Columns</th>
+      <th>Rows</th>
+      <th>X pos</th>
+      <th>Y pos</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @armies.each do |army| %>
+      <tr>
+        <td><%= army.fight_id %></td>
+        <td><%= army.unit_name %></td>
+        <td><%= army.hp_from %></td>
+        <td><%= army.hp_to %></td>
+        <td><%= army.dmg_from %></td>
+        <td><%= army.dmg_to %></td>
+        <td><%= army.def_inf_from %></td>
+        <td><%= army.def_inf_to %></td>
+        <td><%= army.def_hors_from %></td>
+        <td><%= army.def_hors_to %></td>
+        <td><%= army.def_arch_from %></td>
+        <td><%= army.def_arch_to %></td>
+        <td><%= army.unit_type %></td>
+        <td><%= army.columns %></td>
+        <td><%= army.rows %></td>
+        <td><%= army.x_pos %></td>
+        <td><%= army.y_pos %></td>
+        <td><%= link_to 'Show', army %></td>
+        <td><%= link_to 'Edit', edit_army_path(army) %></td>
+        <td><%= link_to 'Destroy', army, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Army', new_army_path %>

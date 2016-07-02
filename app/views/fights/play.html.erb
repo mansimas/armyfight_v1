@@ -1,0 +1,14 @@
+
+<div data-ng-app="app" data-ng-controller="game" data-ng-init = "fight_playing(<%= @fight.id %>)">
+
+  <%= render 'fights/images' %>
+  <%= render 'fights/canvas_elements' %>
+
+  <div data-ng-show = visible>
+    <%= render 'fights/play_unit_stats' %>
+    <%= render 'fights/play_unit_numbers' %>
+  </div>
+
+  <%= render 'fights/play_buttons' %>
+
+</div>
