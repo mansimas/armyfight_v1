@@ -1,19 +1,19 @@
 <div class="col-md-offset-3 col-md-4" style='left: -8px; max-height: 300px; overflow: scroll; position:absolute; background-color: rgba(223, 153, 32, 0.8); color:white;' 
 data-ng-show="edit_army_view(2)">
 
-    <button class="btn btn-primary" data-ng-click='army_view = 1'>Stats page</button>
-    <button class="btn btn-primary" data-ng-click='army_view = 2'>Targets page</button>
-    <button class="btn btn-primary" data-ng-click='army_view = 3'>Formations page</button>
+    <button class="btn btn-primary" data-ng-click='army_view = 1'><%= r('fights.stats_page') %></button>
+    <button class="btn btn-primary" data-ng-click='army_view = 2'><%= r('fights.targets_page') %></button>
+    <button class="btn btn-primary" data-ng-click='army_view = 3'><%= r('fights.formations_page') %></button>
 
     <div class="row" style='padding-top:10px;'>
         <div class="col-md-3">
-            <label>X</label>
+            <label><%= r('fights.x') %></label>
         </div>
         <div class="col-md-3">
-            <label>Y</label>
+            <label><%= r('fights.y') %></label>
         </div>
         <div class="col-md-3">
-            <label>time</label>
+            <label><%= r('fights.time') %></label>
         </div>
     </div>
 
@@ -29,21 +29,21 @@ data-ng-show="edit_army_view(2)">
                 <input type="text" data-ng-model="value.time" class="form-control">
             </div>
             <div class="col-md-2">
-                <button class="btn btn-danger" data-ng-click="remove_target(key)">Remove</button>
+                <button class="btn btn-danger" data-ng-click="remove_target(key)"><%= r('fights.remove') %></button>
             </div>
         </div>
     </div>
 
     <div class="row" style='padding-top:10px;'>
         <div class="col-md-12">
-        <button class="btn btn-success" data-ng-click='deselect_army()'>Deselect this army</button> 
-        <button class="btn btn-success" data-ng-click='center_army()'>Center this army</button>
+        <button class="btn btn-success" data-ng-click='deselect_army()'><%= r('fights.deselect_this_army') %></button> 
+        <button class="btn btn-success" data-ng-click='center_army()'><%= r('fights.center_this_army') %></button>
         </div>
     </div>
 
     <div class="row" style='padding-top:10px;'>
         <div class="col-md-12">
-            <button class="btn btn-success" data-ng-click='enable_targeting()'>Add target point</button>
+            <button class="btn btn-success" data-ng-click='enable_targeting()'><%= r('fights.add_target_point') %></button>
         </div>
     </div>
 

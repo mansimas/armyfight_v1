@@ -2,17 +2,17 @@
 <div class='col-md-offset-2 col-md-8'>
 
 <%= will_paginate @fights, renderer: BootstrapPagination::Rails %>
-<h1 class='text-center'>All Fights</h1>
-<%= link_to 'New Fight', new_fight_path, :class => 'btn btn-success' %>
+<h1 class='text-center'><%= r('all_fights.all_fights') %></h1>
+<%= link_to r('all_fights.new_fight'), new_fight_path, :class => 'btn btn-success' %>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>User</th>
-      <th>Created</th>
-      <th>Updated</th>
-      <th>Watched</th>
+      <th><%= r('all_fights.id') %></th>
+      <th><%= r('all_fights.name') %></th>
+      <th><%= r('all_fights.user') %></th>
+      <th><%= r('all_fights.created') %></th>
+      <th><%= r('all_fights.updated') %></th>
+      <th><%= r('all_fights.watched') %></th>
       <th></th>
     </tr>
   </thead>
@@ -26,10 +26,10 @@
         <td><%= fight.created_at.strftime("%Y-%m-%d %Hh") %></td>
         <td><%= fight.updated_at.strftime("%Y-%m-%d %Hh") %></td>
         <td><%= fight.watched %></td>
-        <td><a href="/play/<%= fight.id %>"  class='btn btn-primary'>Watch</a></td>
+        <td><a href= "/<%= I18n.locale %>/play/<%= fight.id %>" class='btn btn-primary'><%= r('all_fights.watch') %></a></td>
         <% if current_user && current_user.nickname == 'mansim' %>
-          <td><%= link_to 'Edit', edit_fight_path(fight), :class => 'btn btn-primary' %></td>
-          <td><%= link_to 'Destroy', fight, method: :delete, :class => 'btn btn-danger' %></td>
+          <td><%= link_to r('all_fights.edit'), edit_fight_path(fight), :class => 'btn btn-primary' %></td>
+          <td><%= link_to r('all_fights.destroy'), fight, method: :delete, :class => 'btn btn-danger' %></td>
         <% end %>
       </tr>
     <% end %>

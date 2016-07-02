@@ -3,21 +3,21 @@
 <div class="col-md-12 test-window">
 
     <div class="form-group row">
-        <label class="col-md-offset-3"><h2>Log in</h2></label>
+        <label class="col-md-offset-3"><h2><%= r('devise.log_in') %></h2></label>
     </div>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
 
     <div class="form-group row">
-      <label class="col-sm-1 col-md-offset-3">Email</label>
+      <label class="col-sm-1 col-md-offset-3"><%= r('devise.email') %></label>
       <div class="col-sm-3">
         <%= f.email_field :email, autofocus: true, :style => 'width: 100%', :class => 'form-control' %>
       </div>
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-1 col-md-offset-3">Password</label>
+      <label class="col-sm-1 col-md-offset-3"><%= r('devise.password') %></label>
       <div class="col-sm-3">
         <%= f.password_field :password, autocomplete: "off", :style => 'width: 100%', :class => 'form-control' %>
       </div>
@@ -26,7 +26,7 @@
     <% if devise_mapping.rememberable? -%>
         <div class="form-group row">
           <label class="col-sm-2 col-md-offset-4">
-              <%= f.label :remember_me, :style => 'float:right' %>
+              <span style='float:right'><%= r('devise.remember_me') %></span>
           </label>
 
           <div class="col-sm-1">
@@ -37,7 +37,7 @@
 
     <div class="form-group row">
       <div class="col-sm-offset-3 col-sm-4 ">
-        <%= f.submit "Log in", :class => 'btn btn-success', :style => 'width:100%' %>
+        <%= f.submit r('devise.log_in'), :class => 'btn btn-success', :style => 'width:100%' %>
       </div>
     </div>
 

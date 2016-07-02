@@ -11,50 +11,50 @@
           <input type="text" data-ng-model='fight_name' id="fight_name" placeholder="Input fight name" data-ng-change = 'saved=false' class='form-control'>
       </div>
       <div class="col-md-3 columns">
-          <button class='btn btn-primary' data-ng-show=!saved data-ng-click="save_fight()">Save</button>
-          <button class='btn btn-success' data-ng-show=saved data-ng-click="save_fight()">Saved</button>
+          <button class='btn btn-primary' data-ng-show=!saved data-ng-click="save_fight()"><%= r('fights.save') %></button>
+          <button class='btn btn-success' data-ng-show=saved data-ng-click="save_fight()"><%= r('fights.saved') %></button>
       </div>
       <div class="col-md-4 columns">
-          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(1)">Hide Army stats</button>
-          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(2)">Hide Army stats</button>
-          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(3)">Hide Army stats</button>
-          <button class='btn btn-success' data-ng-click="army_view = 1" data-ng-show="edit_army_view(0)">Show Army stats</button>
+          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(1)"><%= r('fights.hide_army_stats') %></button>
+          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(2)"><%= r('fights.hide_army_stats') %></button>
+          <button class='btn btn-success' data-ng-click="army_view = 0" data-ng-show="edit_army_view(3)"><%= r('fights.hide_army_stats') %></button>
+          <button class='btn btn-success' data-ng-click="army_view = 1" data-ng-show="edit_army_view(0)"><%= r('fights.show_army_stats') %></button>
       </div>
   </div>
 
   <div class="form-group row">
       <div class="col-md-5 columns">
-          <label class="form-control-label"> Attackers count: </label>
+          <label class="form-control-label"> <%= r('fights.attackers_count') %>: </label>
       </div>
       <div class="col-md-2 columns">
           <div data-ng-bind="countAlly"></div>
       </div>
       <div class="col-md-5 columns">
-          <button class='btn btn-primary' data-ng-click="add_army('ally')" style='width:170px;'>Add attacker army</button>
+          <button class='btn btn-primary' data-ng-click="add_army('ally')" style='width:170px;'><%= r('fights.add_attacker_army') %></button>
       </div>
   </div>
 
   <div class="form-group row">
       <div class="col-md-5 columns">
-          <label class="form-control-label"> Defenders count: </label>
+          <label class="form-control-label"> <%= r('fights.defenders_count') %>: </label>
       </div>
       <div class="col-md-2 columns">
           <div data-ng-bind="countEnemy"></div>
       </div>
       <div class="col-md-5 columns">
-          <button class='btn btn-primary' data-ng-click="add_army('enemy')" style='width:170px;'>Add defender army</button>
+          <button class='btn btn-primary' data-ng-click="add_army('enemy')" style='width:170px;'><%= r('fights.add_defender_army') %></button>
       </div>
   </div>
 
   <div class="form-group row">
       <div class="col-md-4 columns">
-          <label class="form-control-label"> Army type </label>
+          <label class="form-control-label"> <%= r('fights.army_type') %> </label>
       </div>
       <div class="col-md-2 columns">
-          <label class="form-control-label"> Rows </label>
+          <label class="form-control-label"> <%= r('fights.rows') %> </label>
       </div>
       <div class="col-md-2 columns">
-          <label class="form-control-label"> Columns </label>
+          <label class="form-control-label"> <%= r('fights.columns') %> </label>
       </div>
       <div class="col-md-4 columns">
       </div>
@@ -64,13 +64,13 @@
     <div class="form-group row">
         <div class="col-md-4 columns">
             <select data-ng-model="value.unit" data-ng-change="change_stats(key, 'ally')" class="form-control" style="background-color:#ec5840; color:white;">
-                <option value="spear">Spearman</option>
-                <option value="sword">Swordsman</option>
-                <option value="axe">Axemen</option>
-                <option value="bow">Bowman</option>
-                <option value="light">Light cavalry</option>
-                <option value="mounted">Mounted archer</option>
-                <option value="heavy">Heavy cavalry</option>
+                <option value="spear"><%= r('fights.spearman') %></option>
+                <option value="sword"><%= r('fights.swordsman') %></option>
+                <option value="axe"><%= r('fights.axemen') %></option>
+                <option value="bow"><%= r('fights.bowman') %></option>
+                <option value="light"><%= r('fights.light_cav') %></option>
+                <option value="mounted"><%= r('fights.mounted_arch') %></option>
+                <option value="heavy"><%= r('fights.heavy_cav') %></option>
             </select>
         </div>
         <div class="col-md-2 columns">
@@ -80,8 +80,8 @@
             <input type="text" data-ng-model="value.column" data-ng-change="change_stats(key, 'ally')" class="form-control">
         </div>
         <div class="col-md-4 columns">
-            <button data-ng-class="find_class(key, 'ally')" data-ng-click="change_unit_stats('ally', key)">Select</button>
-            <button class='btn btn-danger' data-ng-click="remove(key, 'ally')">X</button>
+            <button data-ng-class="find_class(key, 'ally')" data-ng-click="change_unit_stats('ally', key)"><%= r('fights.select') %></button>
+            <button class='btn btn-danger' data-ng-click="remove(key, 'ally')"><%= r('fights.x') %></button>
         </div>
     </div>
   </div>
@@ -91,13 +91,13 @@
     <div class="form-group row">
         <div class="col-md-4 columns">
             <select data-ng-model="value.unit" data-ng-change="change_stats(key, 'enemy')" class="form-control" style="background-color:#2199e8; color:white;">
-                <option value="spear">Spearman</option>
-                <option value="sword">Swordsman</option>
-                <option value="axe">Axemen</option>
-                <option value="bow">Bowman</option>
-                <option value="light">Light cavalry</option>
-                <option value="mounted">Mounted archer</option>
-                <option value="heavy">Heavy cavalry</option>
+                <option value="spear"><%= r('fights.spearman') %></option>
+                <option value="sword"><%= r('fights.swordsman') %></option>
+                <option value="axe"><%= r('fights.axemen') %></option>
+                <option value="bow"><%= r('fights.bowman') %></option>
+                <option value="light"><%= r('fights.light_cav') %></option>
+                <option value="mounted"><%= r('fights.mounted_arch') %></option>
+                <option value="heavy"><%= r('fights.heavy_cav') %></option>
             </select>
         </div>
         <div class="col-md-2 columns">
@@ -107,8 +107,8 @@
             <input type="text" data-ng-model="value.column" data-ng-change="change_stats(key, 'enemy')" class="form-control">
         </div>
         <div class="col-md-4 columns">
-            <button data-ng-class="find_class(key, 'enemy')" data-ng-click="change_unit_stats('enemy', key)">Select</button>
-            <button class='btn btn-danger' data-ng-click="remove(key, 'enemy')">X</button>
+            <button data-ng-class="find_class(key, 'enemy')" data-ng-click="change_unit_stats('enemy', key)"><%= r('fights.select') %></button>
+            <button class='btn btn-danger' data-ng-click="remove(key, 'enemy')"><%= r('fights.x') %></button>
         </div>
     </div>
   </div>

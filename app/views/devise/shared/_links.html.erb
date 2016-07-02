@@ -2,7 +2,7 @@
 <%- if controller_name != 'sessions' %>
     <div class="form-group row">
       <div class="col-md-offset-3 col-sm-2">
-       		<%= link_to "Log in", new_session_path(resource_name), :class => 'btn btn-primary', :style => 'width:100%' %><br />
+       		<%= link_to r('devise.log_in'), new_session_path(resource_name), :class => 'btn btn-primary', :style => 'width:100%' %><br />
       </div>
     </div>
 <% end -%>
@@ -11,7 +11,7 @@
   <%- resource_class.omniauth_providers.each do |provider| %>
       <div class="form-group row">
         <div class="col-md-offset-3 col-sm-3">
-            <%= link_to "Log in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), :class => 'btn btn-primary', :style => 'width:100%' %><br />
+            <%= link_to r('devise.log_in_with') + " #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), :class => 'btn btn-primary', :style => 'width:100%' %><br />
         </div>
       </div>
   <% end -%>
@@ -20,7 +20,7 @@
 
     <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
           <div>
-              <%= link_to "Sign up", new_registration_path(resource_name), :class => 'btn btn-primary' %><br />
+              <%= link_to r('devise.sign_up'), new_registration_path(resource_name), :class => 'btn btn-primary' %><br />
           </div>
     <% end -%>
 
