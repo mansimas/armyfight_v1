@@ -2,7 +2,7 @@
     <br>
 
     <span><%= link_to r('fights.home'), root_path, class: 'btn btn-default' %></span><br><br>
-    <button class="btn btn-primary armywatch" data-ng-show='!attacking' data-ng-click="start_attack()"><%= r('fights.attack') %></button>
+    <button class="btn btn-primary armywatch" data-ng-show='!attacking' data-ng-click="start_attack()"><%= r('fights.start_attack') %></button>
     <button class="btn btn-primary armywatch" data-ng-show='attacking' data-ng-click="start_attack()"><%= r('fights.stop') %></button>
 
     <% if current_user && current_user.nickname == 'mansim' %>
