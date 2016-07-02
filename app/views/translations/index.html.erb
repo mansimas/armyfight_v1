@@ -1,0 +1,119 @@
+<%= render 'layouts/navigation' %>
+<div class="container">
+
+    <table id ="languages">
+        <tr>
+            <th>Add language: 
+            <%= text_field_tag "language", nil, :id => "new_language", :style => 'margin-left: 30px;' %>
+            <button type='button' onclick="add_language()" ><i class="fa fa-plus" style='color:blue' ></i></button>
+            </th>
+        </tr>
+        <tr >
+            <th>
+                Available languages:
+            <% ($redis.hkeys 'languages').each do |lang| %>
+                <span style='padding-left: 20px;'><%= lang %> 
+                <% if lang != 'en' %>
+                <button type='button' onclick="del_locale('<%= lang%>')"><i class="fa fa-trash-o" style='color:red' ></i></button>
+                <% end %>
+                </span>
+            <% end %>
+            </th>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <table class='table table-striped' id ="languages">
+        <tr>
+        <th style='width: 20px;'></th>
+        <th style='width: 10px;'>key</th>
+        <% ($redis.hkeys 'languages').each do |lang| %>
+            <th><%= lang %></th>
+            <th style='width: 20px;'></th>
+        <% end %>
+        </tr>
+        <% ($redis.hkeys 'en').each_with_index do |k, index| %>
+            <tr id="<%= index %>">
+                <td style='width: 20px;'>
+                      <button type='button' onclick="del('<%= k %>', '<%= index %>')"><i class="fa fa-trash-o" style='color:red' ></i></button>
+                </td>
+                <td style='width: 10px;'><%= k %></td>
+                <% ($redis.hkeys 'languages').each do |lang| %>
+                    <td>
+                    <%= text_field_tag k, ($redis.hget lang, k), :id => (lang+index.to_s), :style => 'width:100%', :onkeydown => "changed('#{lang}', '#{index}')" %>
+                    </td>
+                    <td style='width: 20px;'>
+                    <button type='button' onclick="change('<%= lang %>', '<%= index %>', '<%= k %>')"><i class="fa fa-check" style='color:green' id="fa<%= lang %><%= index.to_s %>"></i></button>
+                    
+                    </td>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
+
+</div>
+
+<script>
+    function del(key, index) {
+        $.ajax({
+            type: 'POST',
+            data: {key: key},
+            cache: true,
+            url: '/en/delete_key',
+            dataType: 'script'
+        });
+
+        $('#' + String(index)).remove();
+
+        return false;
+    }
+
+    function change(lang, index, key) {
+        var value = $('#' + String(lang) + String(index)).val();
+        $.ajax({
+            type: 'POST',
+            data: {lang: lang, value: value, key: key},
+            cache: true,
+            url: '/en/change_value',
+            dataType: 'script'
+        });
+        $('#fa' + String(lang) + String(index)).css('color', 'green');
+
+        return false;
+    }
+
+    function changed(lang, index) {
+        $('#fa' + String(lang) + String(index)).css('color', 'red');
+    }
+
+    function add_language() {
+        var value = $('#new_language').val();
+        $.ajax({
+            type: 'POST',
+            data: {lang: value},
+            cache: true,
+            url: '/en/add_language',
+            dataType: 'script'
+        });
+
+        var locale = "<%= I18n.locale %>";
+        var url = '/' + locale + '/translations';
+        document.location.href = url
+    }
+
+    function del_locale(loc) {
+        $.ajax({
+            type: 'POST',
+            data: {loc: loc},
+            cache: true,
+            url: '/en/delete_locale',
+            dataType: 'script'
+        });
+
+        var locale = "<%= I18n.locale %>";
+        var url = '/' + locale + '/translations';
+        document.location.href = url
+    }
+</script>

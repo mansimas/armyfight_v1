@@ -22,3 +22,4 @@ pickle-email-*.html
 /vendor/bundle
 
 public/assets/
+dump.rdb
