@@ -19,3 +19,5 @@ gem 'bootstrap-sass', '3.3.5'
 gem 'jquery-turbolinks'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'heroku'
+gem 'rails_12factor', group: :production
