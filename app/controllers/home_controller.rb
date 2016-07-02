@@ -9,7 +9,6 @@ class HomeController < ApplicationController
   end
 
   def about
-  	$redis.set 'alfa', 'beta'
   end
 
 end
