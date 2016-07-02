@@ -12,9 +12,9 @@ module ApplicationHelper
   			else
   				return ($redis.hget 'en', value)
   			end
-		else
-			return $redis.hget I18n.locale, value
-		end
+  		else
+  			return $redis.hget I18n.locale, value
+  		end
   	else
   	    $redis.hset 'en', value, ''
   	    return value
