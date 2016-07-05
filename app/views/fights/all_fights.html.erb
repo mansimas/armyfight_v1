@@ -21,7 +21,7 @@
     <% @fights.each do |fight| %>
       <tr>
         <td><%= fight.id %></td>
-        <td><%= fight.name.truncate(30) %></td>
+        <td><%= fight.name.truncate(30) if fight.name %></td>
         <td><%= fight.user.nickname %></td>
         <td><%= fight.created_at.strftime("%Y-%m-%d %Hh") %></td>
         <td><%= fight.updated_at.strftime("%Y-%m-%d %Hh") %></td>

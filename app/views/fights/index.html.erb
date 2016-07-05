@@ -20,7 +20,7 @@
     <% @fights.each do |fight| %>
       <tr>
         <td><%= fight.id %></td>
-        <td><%= fight.name.truncate(30) %></td>
+        <td><%= fight.name.truncate(30) if fight.name %></td>
         <td><%= fight.created_at.strftime("%Y %m %d %H:%M:%S") %></td>
         <td><%= fight.updated_at.strftime("%Y %m %d %H:%M:%S") %></td>
         <td><a href= "/<%= I18n.locale %>/play/<%= fight.id %>" class='btn btn-primary'><%= r('fights.watch') %></a></td>

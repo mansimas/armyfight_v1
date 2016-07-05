@@ -1,0 +1,47 @@
+<div data-ng-show="edit_army_view(4)" style='padding: 15px;'>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-3">
+            <label><%= r('fights.x') %></label>
+        </div>
+        <div class="col-md-3">
+            <label><%= r('fights.y') %></label>
+        </div>
+        <div class="col-md-3">
+            <label><%= r('fights.time') %></label>
+        </div>
+    </div>
+
+    <div data-ng-repeat="(key, value) in unit_for_stats_change.targets">
+        <div class="form-group row">
+            <div class="col-md-3">
+                <input type="text" data-ng-model="value.x" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" data-ng-model="value.y" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" data-ng-model="value.time" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-danger" data-ng-click="remove_target(key)"><%= r('fights.remove') %></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12">
+        <button class="btn btn-success" data-ng-click='deselect_army()'><%= r('fights.deselect_this_army') %></button> 
+        <button class="btn btn-success" data-ng-click='center_army()'><%= r('fights.center_this_army') %></button>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12">
+            <button class="btn btn-success" data-ng-click='enable_targeting()'><%= r('fights.add_target_point') %></button>
+        </div>
+    </div>
+
+    <br>
+
+</div>
