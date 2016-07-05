@@ -1,0 +1,18 @@
+<%= render 'layouts/navigation' %>
+<div style='position:relative'>
+<div style='z-index: -1;'>
+	<%= render 'fights/images' %>
+	<%= render 'fights/canvas_elements' %>
+</div>
+
+<div style='right:120px; width: 500px; position:absolute; z-index: 10; background-color: rgba(33, 153, 232, 0.8); color:white; height: 500px; overflow-x: scroll; ' data-ng-show="!edit_army_view(0)">
+    <br>
+    <%= render 'fights/edit_armies' %>
+    <%= render 'fights/edit_stats' %>
+    <%= render 'fights/edit_targets' %>
+
+</div>
+
+<%= render 'fights/edit_buttons' %>
+
+</div>

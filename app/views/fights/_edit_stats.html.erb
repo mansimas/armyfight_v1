@@ -1,8 +1,4 @@
-<div class="col-md-offset-3 col-md-4" style='left: -8px; position:absolute; background-color: rgba(33, 153, 232, 0.8); color:white;' data-ng-show="edit_army_view(1)">
-
-    <button class="btn btn-primary" data-ng-click='army_view = 1'><%= r('fights.stats_page') %></button>
-    <button class="btn btn-primary" data-ng-click='army_view = 2'><%= r('fights.targets_page') %></button>
-    <button class="btn btn-primary" data-ng-click='army_view = 3'><%= r('fights.formations_page') %></button>
+<div data-ng-show="edit_army_view(1)" style='padding: 15px;'>
 
     <div class="row" style='padding-top:10px;'>
         <div class="col-md-6 columns">
@@ -62,13 +58,16 @@
     </div>
 
     <div class="row" style='padding-top:10px;'>
-        <div class="col-md-6 columns">
-            <button class="btn btn-success" data-ng-click='center_army()'><%= r('fights.center_this_army') %></button>
-            <button class="btn btn-success" data-ng-click='deselect_army()'><%= r('fights.deselect_this_army') %></button>
-        </div>
-        <div class="col-md-6 columns">
+        <div class="col-md-12 columns">
             <label class="form-control-label"> <%= r('fights.speed') %>: </label>
             <input type="text" data-ng-model="unit_for_stats_change.stats.speed" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <button class="btn btn-success" data-ng-click='center_army()'><%= r('fights.center_this_army') %></button>
+            <button class="btn btn-success" data-ng-click='deselect_army()'><%= r('fights.deselect_this_army') %></button>
         </div>
     </div>
 

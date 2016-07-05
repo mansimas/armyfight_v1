@@ -16,7 +16,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.unit_for_stats_change = {};
         $scope.formations = ud.get_formations('both');
         $scope.images_to_show = 2;
-        $scope.army_view = 1;
+        $scope.army_view = 3;
 
     //
     // Mouse events
