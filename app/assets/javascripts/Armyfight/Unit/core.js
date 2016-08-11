@@ -38,7 +38,8 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
     };
 
     Core.prototype.initiate = function() {
-        for(var row = 0; row < this.formations['ally'].length; row++) {
+        var ally_length = this.formations['ally'].length;
+        for(var row = 0; row < ally_length; row++) {
             var ally_row_y = parseInt(this.formations['ally'][row]['y']);
             var ally_row_row = parseInt(this.formations['ally'][row]['row']) + ally_row_y;
             for(var y = ally_row_y; y < ally_row_row; y++) {
@@ -57,7 +58,8 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                     stats.def_hors = stats.def_hors_from;
                     stats.def_arch = stats.def_arch_from;
                     var army_targets = []
-                    for(var t = 0; t < this.formations['ally'][row].targets.length; t++ ) {
+                    var targets_length = this.formations['ally'][row].targets.length;
+                    for(var t = 0; t < targets_length; t++ ) {
                         var army_target = this.clone(this.formations['ally'][row].targets[t]);
                         army_target.x = parseInt((army_target.x - this.formations['ally'][row].column * this.distance_x / 2) / 
                         this.distance_x + x - ally_row_x);
@@ -80,7 +82,8 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                 this.ally[y] = columns;
             }
         }
-        for(row = 0; row < this.formations['enemy'].length; row++) {
+        var enemies_length = this.formations['enemy'].length;
+        for(row = 0; row < enemies_length; row++) {
             var enemy_row_y = parseInt(this.formations['enemy'][row]['y']);
             var enemy_row_row = parseInt(this.formations['enemy'][row]['row']) + enemy_row_y;
             for( y = enemy_row_y; y < enemy_row_row; y++) {
@@ -99,7 +102,8 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                     stats.def_hors = stats.def_hors_from;
                     stats.def_arch = stats.def_arch_from;
                     var army_targets = []
-                    for(var t = 0; t < this.formations['enemy'][row].targets.length; t++ ) {
+                    var targets_length = this.formations['enemy'][row].targets.length;
+                    for(var t = 0; t < targets_length; t++ ) {
                         var army_target = this.clone(this.formations['enemy'][row].targets[t]);
                         army_target.x = parseInt((army_target.x - this.formations['enemy'][row].column * this.distance_x / 2) / 
                         this.distance_x + x - enemy_row_x);

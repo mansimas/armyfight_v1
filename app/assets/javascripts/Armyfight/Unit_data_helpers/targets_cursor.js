@@ -51,9 +51,11 @@ targets_cursor.factory('targets_cursor', [function() {
     TargetsCursor.prototype.draw_targets = function() {
         var self = this;
         _.each(['enemy', 'ally'], function(type) {
-            for(var x = 0; x < self.formations[type].length; x++) {
+            var formations_length = self.formations[type].length;
+            for(var x = 0; x < formations_length; x++) {
                 var army = self.formations[type][x];
-                for(var t = 0; t < army.targets.length; t++) {
+                var army_targets_length = army.targets.length;
+                for(var t = 0; t < army_targets_length; t++) {
                     if(t == 0) {
                         if( type == 'ally') { 
                             var xx = (army.x * self.distance_x) - self.drag_x - army.column 

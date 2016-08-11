@@ -16,7 +16,8 @@ death_canvas.factory('death_canvas', ['draggable_armies', function (DraggableArm
 
     DeathCanvas.prototype.draw_deaths = function() {
         this.clear_dth_canvas();
-        for(var x = 0; x < this.died_units.length; x++) {
+        var units_length = this.died_units.length
+        for(var x = 0; x < units_length; x++) {
             unit = this.died_units[x];
             if(unit[0]['team'] == 1) {
                 var img = this.image['sword']['d_r'];

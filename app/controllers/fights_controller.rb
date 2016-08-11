@@ -11,7 +11,7 @@ class FightsController < ApplicationController
   end
 
   def show
-    @fight = Fight.find(params[:id])
+    @fight = Fight.find_by_name(params[:id])
     targets = []
     @fight.armies.each do |a|
       a.targets.each do |t|
@@ -26,7 +26,7 @@ class FightsController < ApplicationController
   end
 
   def play
-    @fight = Fight.find_by_id(params[:id])
+    @fight = Fight.find_by_name(params[:id])
     if !@fight
       redirect_to root_path
     end
@@ -35,7 +35,7 @@ class FightsController < ApplicationController
   def watched_fight
     ActiveRecord::Base.record_timestamps = false
     begin
-      @fight = Fight.find(params[:id])
+      @fight = Fight.find_by_name(params[:id])
       @fight.watched = @fight.watched.to_i + 1
       @fight.save
     ensure
@@ -77,7 +77,7 @@ class FightsController < ApplicationController
 
   private
     def set_fight
-      @fight = Fight.find(params[:id])
+      @fight = Fight.find_by(name: params[:id])
     end
 
     def fight_params

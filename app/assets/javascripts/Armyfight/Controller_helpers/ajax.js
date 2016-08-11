@@ -5,7 +5,7 @@ ajax.factory('ajax', ['$http', function ($http) {
     function Ajax() {}
 
     Ajax.prototype.get_armies = function(id, callback) {
-        var url = '/fights/'+ String(id);
+        var url = '/en/fights/'+ String(id);
         $http.get(url).then(function(response) {
             var armies_list = response.data.fight;
             var formations = {ally: [], enemy: [] };
@@ -55,7 +55,8 @@ ajax.factory('ajax', ['$http', function ($http) {
     Ajax.prototype.flush_armies_to_db = function(formations, id) {
         var self = this;
         _.each(['ally', 'enemy'], function(type) {
-            for(var x = 0; x < formations[type].length; x++) {
+            var formations_length = formations[type].length;
+            for(var x = 0; x < formations_length; x++) {
                 self.add_army(id, formations[type][x], type);
             }
         });
@@ -63,7 +64,7 @@ ajax.factory('ajax', ['$http', function ($http) {
 
 
     Ajax.prototype.edit_fight = function(id, name) {
-        var url = '/fights/'+ String(id);
+        var url = '/en/fights/'+ String(id);
 
         var data = {
             fight_name: name
@@ -81,7 +82,7 @@ ajax.factory('ajax', ['$http', function ($http) {
     }
 
     Ajax.prototype.add_fight = function(name, callback) {
-        var url = "/fights.json";
+        var url = "/en/fights.json";
 
         var data = {
             fight_name: name
@@ -100,7 +101,7 @@ ajax.factory('ajax', ['$http', function ($http) {
     }
 
      Ajax.prototype.add_army = function(id, army, direction) {
-        var url = "/armies.json";
+        var url = "/en/armies.json";
 
         var data = {
             direction: direction,
@@ -121,7 +122,7 @@ ajax.factory('ajax', ['$http', function ($http) {
     }
 
     Ajax.prototype.delete_all_armies = function(id) {
-        var url = "/destroy_armies";
+        var url = "/en/destroy_armies";
 
         var data = {
             fight_id: id
@@ -139,7 +140,7 @@ ajax.factory('ajax', ['$http', function ($http) {
     }
 
     Ajax.prototype.count_fight_watches = function(id) {
-        var url = "/watched_fight";
+        var url = "/en/watched_fight";
 
         var data = {
             id: id

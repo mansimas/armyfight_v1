@@ -1,5 +1,6 @@
-
-<div data-ng-app="app" data-ng-controller="game" data-ng-init = "fight_playing(<%= @fight.id %>)">
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<div data-ng-app="app" data-ng-controller="game" data-ng-init = "fight_playing('<%= @fight.name %>')">
 
   <%= render 'fights/images' %>
   <%= render 'fights/canvas_elements' %>
