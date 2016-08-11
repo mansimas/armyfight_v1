@@ -16,18 +16,8 @@
 	      <li><%= link_to r('navigation.watch_fights'), all_fights_path %></li>
 
 	      <% if user_signed_in? %>
-<<<<<<< HEAD
             <li><%= link_to('Your fights', fights_path) %></li>
             <li><%= link_to 'New fight', new_fight_path %></li>
-=======
-		      <li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= r('navigation.user_page') %> <span class="caret"></span></a>
-		        <ul class="dropdown-menu">
-		            <li><%= link_to r('navigation.your_fights'), fights_path %></li>
-		            <li><%= link_to r('navigation.new_fight'), new_fight_path %></li>
-		        </ul>
-		      </li>
->>>>>>> d4fca1d4bc5f4dc700e0ff4889f949f8e87eb0e3
 	      <% end %>
 
 	      <% if current_user && current_user.nickname == 'mansim' %>
