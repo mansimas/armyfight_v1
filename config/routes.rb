@@ -9,9 +9,6 @@ Rails.application.routes.draw do
 
     ## LAYOUT LINKS
     root 'home#index'
-    get 'home' => 'home#index'
-    get 'simulator' => 'home#armyfight'
-    get 'about' => 'home#about'
     get 'translations' => 'translations#index'
 
     ## AJAX FOR ARMIES

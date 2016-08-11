@@ -1,0 +1,77 @@
+<div data-ng-show="edit_army_view(1)" style='padding: 15px;'>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> <%= r('fights.army_units') %>: </label>
+            <strong><div data-ng-bind="unit_for_stats_change.stats.unit" style='display:inline; float:right;'></div></strong>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> <%= r('fights.army_type') %>: </label>
+            <strong><div data-ng-bind="unit_for_stats_change.stats.type" style='display:inline; float:right;'></div></strong>
+        </div>
+    </div><br>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> <%= r('fights.x_position') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.x" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+        <div class="col-md-6 columns">
+            <label class="form-control-label"> <%= r('fights.y_position') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.y" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <label class="form-control-label"> <%= r('fights.health') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.hp_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <label class="form-control-label"> <%= r('fights.attack') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.dmg_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <label class="form-control-label"> <%= r('fights.def_horse') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_hors_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <label class="form-control-label"> <%= r('fights.def_arch') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_arch_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <label class="form-control-label"> <%= r('fights.def_inf') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.def_inf_from" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <label class="form-control-label"> <%= r('fights.speed') %>: </label>
+            <input type="text" data-ng-model="unit_for_stats_change.stats.speed" class="form-control" style='display:inline; width: 40%; float:right;'>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12 columns">
+            <button class="btn btn-success" data-ng-click='center_army()'><%= r('fights.center_this_army') %></button>
+            <button class="btn btn-success" data-ng-click='deselect_army()'><%= r('fights.deselect_this_army') %></button>
+        </div>
+    </div>
+
+
+    <br>
+
+</div>

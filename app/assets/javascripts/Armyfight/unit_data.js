@@ -79,18 +79,13 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 // Canvas resize functions
 //    
     UnitData.prototype.edit_window_size = function() {
-        this.ctx.canvas.width = $(window).width() - $(window).width()/2.35;
-        this.bg_ctx.canvas.width = $(window).width() - $(window).width()/2.35;
-        this.ctx.canvas.height =  $(window).height() - $(window).height()/100;
-        this.bg_ctx.canvas.height =  $(window).height() - $(window).height()/100;
+        this.ctx.canvas.width =  $(window).width() - 120;
+        this.bg_ctx.canvas.width =  $(window).width() - 120;
+        this.ctx.canvas.height =  $(window).height() - $(window).height()/10;
+        this.bg_ctx.canvas.height =  $(window).height() - $(window).height()/10;
         if(!_.isEmpty(this.core)) {
-            this.core.dth_ctx.canvas.height =  $(window).height() - $(window).height()/100;
-            if(!this.editing) this.core.dth_ctx.canvas.width =  $(window).width() - 120;
-            else this.core.dth_ctx.canvas.width =  $(window).width()/2.35;
-        }
-        if(!this.editing) {
-            this.ctx.canvas.width =  $(window).width() - 120;
-            this.bg_ctx.canvas.width =  $(window).width() - 120;
+            this.core.dth_ctx.canvas.height =  $(window).height() - $(window).height()/10;
+            this.core.dth_ctx.canvas.width =  $(window).width() - 120;
         }
         if(this.first_attack) this.formation_changed();
     }

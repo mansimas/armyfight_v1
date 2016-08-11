@@ -1,31 +1,31 @@
 <div style='width: 110px; float:right;'>
     <br>
 
-    <span><a href="/" class="btn btn-default">Home</a></span><br><br>
-    <button class="btn btn-primary armywatch" data-ng-show='!attacking' data-ng-click="start_attack()">Attack</button>
-    <button class="btn btn-primary armywatch" data-ng-show='attacking' data-ng-click="start_attack()">Stop</button>
+    <span><%= link_to r('fights.home'), root_path, class: 'btn btn-default' %></span><br><br>
+    <button class="btn btn-primary armywatch" data-ng-show='!attacking' data-ng-click="start_attack()"><%= r('fights.start_attack') %></button>
+    <button class="btn btn-primary armywatch" data-ng-show='attacking' data-ng-click="start_attack()"><%= r('fights.stop') %></button>
 
     <% if current_user && current_user.nickname == 'mansim' %>
-        <button class="btn btn-primary armywatch" data-ng-click="log()">LOG</button>
+        <button class="btn btn-primary armywatch" data-ng-click="log()"><%= r('fights.log') %></button>
     <% end %>
 
     <br><br>
-    Units count:<br>
+    <%= r('fights.units_count') %>:<br>
     
     <div class="armywatch text-center" data-ng-bind="countAlly" style="background-color: #f04124; color:white"></div>
     <div class="armywatch text-center" data-ng-bind="countEnemy" style="background-color: rgb(33, 153, 232); color:white"></div>
     <br>
-    Quality:<br>
-    <a style='color:#7E7E7E' data-ng-click="low_graphics()" data-ng-disabled="changing_image"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i> Low</a><br>
-    <a style='color:#3F3F3F' data-ng-click="normal_graphics()" data-ng-disabled="changing_image"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i> Medium</a><br>
-    <a style='color:black' data-ng-click="best_graphics()" data-ng-disabled="changing_image"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i> Best</a><br>
+    <%= r('fights.quality') %>:<br>
+    <a style='color:#7E7E7E' data-ng-click="low_graphics()" data-ng-disabled="changing_image"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i> <%= r('fights.low') %></a><br>
+    <a style='color:#3F3F3F' data-ng-click="normal_graphics()" data-ng-disabled="changing_image"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i> <%= r('fights.medium') %></a><br>
+    <a style='color:black' data-ng-click="best_graphics()" data-ng-disabled="changing_image"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i> <%= r('fights.best') %></a><br>
    
-	Zoom:<br>
+	<%= r('fights.zoom') %>:<br>
     <a data-ng-click="plus_size()"><i class="fa fa-search-plus fa-3x" ></i></a>
     <a data-ng-click="minus_size()"><i class="fa fa-search-minus fa-3x"></i></a>
 
     <br>
-    Speed:<br>
+    <%= r('fights.speed') %>:<br>
     <div class='btn-group'>
         <button ng-class="change_speed_button(150)" data-ng-click="change_speed(150)"></button>
         <button ng-class="change_speed_button(80)" data-ng-click="change_speed(80)"></button>

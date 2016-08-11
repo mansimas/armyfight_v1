@@ -2,16 +2,16 @@
 <%= render 'layouts/navigation' %>
 <div class="container">
 <div class='col-md-offset-2 col-md-8'>
-<h1 class='text-center'>All Fights</h1>
+<h1 class='text-center'><%= r('fights.all_fights') %></h1>
 <%= will_paginate @fights, renderer: BootstrapPagination::Rails %>
-<%= link_to 'New Fight', new_fight_path, :class => 'btn btn-success' %>
+<%= link_to r('fights.new_fight'), new_fight_path, :class => 'btn btn-success' %>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Created</th>
-      <th>Updated</th>
+      <th><%= r('fights.id') %></th>
+      <th><%= r('fights.name') %></th>
+      <th><%= r('fights.created') %></th>
+      <th><%= r('fights.updated') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,12 +20,18 @@
     <% @fights.each do |fight| %>
       <tr>
         <td><%= fight.id %></td>
-        <td><%= fight.name.truncate(30) %></td>
+        <td><%= fight.name.truncate(30) if fight.name %></td>
         <td><%= fight.created_at.strftime("%Y %m %d %H:%M:%S") %></td>
         <td><%= fight.updated_at.strftime("%Y %m %d %H:%M:%S") %></td>
+<<<<<<< HEAD
         <td><a href="/play/<%= fight.id %>" class='btn btn-primary'>Watch</a></td>
         <td><%= link_to 'Edit', edit_fight_path(fight.name), :class => 'btn btn-primary' %></td>
         <td><%= link_to 'Destroy', fight.name, method: :delete, :class => 'btn btn-danger' %></td>
+=======
+        <td><a href= "/<%= I18n.locale %>/play/<%= fight.id %>" class='btn btn-primary'><%= r('fights.watch') %></a></td>
+        <td><%= link_to r('fights.edit'), edit_fight_path(fight), :class => 'btn btn-primary' %></td>
+        <td><%= link_to r('fights.destroy'), fight, method: :delete, :class => 'btn btn-danger' %></td>
+>>>>>>> d4fca1d4bc5f4dc700e0ff4889f949f8e87eb0e3
       </tr>
     <% end %>
  

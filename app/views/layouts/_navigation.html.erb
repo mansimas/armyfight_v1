@@ -8,21 +8,30 @@
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	    </button>
-	    <a class="navbar-brand" href="/"><%= r('armyfight') %></a>
+	    <%= link_to r('navigation.armyfight'), root_path, class: "navbar-brand" %>
 	  </div>
 	  <div id="navbar" class="navbar-collapse collapse">
 	    <ul class="nav navbar-nav">
-	      <li class="active"><%= link_to('Home', root_path) %></li>
-	      <li><%= link_to('About', about_path) %></li>
-	      <li><%= link_to('Watch fights', all_fights_path) %></li>
+	      <li class="active"><%= link_to r('navigation.home'), root_path %></li>
+	      <li><%= link_to r('navigation.watch_fights'), all_fights_path %></li>
 
 	      <% if user_signed_in? %>
+<<<<<<< HEAD
             <li><%= link_to('Your fights', fights_path) %></li>
             <li><%= link_to 'New fight', new_fight_path %></li>
+=======
+		      <li class="dropdown">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= r('navigation.user_page') %> <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+		            <li><%= link_to r('navigation.your_fights'), fights_path %></li>
+		            <li><%= link_to r('navigation.new_fight'), new_fight_path %></li>
+		        </ul>
+		      </li>
+>>>>>>> d4fca1d4bc5f4dc700e0ff4889f949f8e87eb0e3
 	      <% end %>
 
 	      <% if current_user && current_user.nickname == 'mansim' %>
-	      	  <li><%= link_to('Translations', translations_path) %></li>
+	      	  <li><%= link_to r('navigation.translations'), translations_path %></li>
 	      <% end %>
 
 	    </ul>
@@ -36,10 +45,10 @@
 
 
 	        <% if user_signed_in? %>
-	        	<li class="active"><%= link_to "Sign Out #{current_user.nickname}", destroy_user_session_path, :method => :delete %></li>
+	        	<li class="active"><%= link_to r('navigation.sign_out') + " #{current_user.nickname}", destroy_user_session_path, :method => :delete %></li>
 	        <% else %>
-	        	<li class="active"><%= link_to "Log in", new_session_path(:user) %></li>
-	        	<li><%= link_to "Sign up", new_registration_path(:user) %></li>
+	        	<li class="active"><%= link_to r('navigation.log_in') , new_session_path(:user) %></li>
+	        	<li><%= link_to r('navigation.sign_up'), new_registration_path(:user) %></li>
 	        <% end %>
 	    </ul>
 	  </div>
