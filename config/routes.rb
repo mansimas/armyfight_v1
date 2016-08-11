@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     ## LAYOUT LINKS
     root 'home#index'
     get 'translations' => 'translations#index'
+    get 'destroy_fight' => 'fights#destroy'
+    get 'destroy_army' => 'armies#destroy'
 
     ## AJAX FOR ARMIES
     post 'destroy_armies' => 'fights#destroy_armies'

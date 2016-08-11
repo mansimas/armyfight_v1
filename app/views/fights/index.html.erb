@@ -23,7 +23,7 @@
         <td><%= fight.name.truncate(30) if fight.name %></td>
         <td><%= fight.created_at.strftime("%Y %m %d %H:%M:%S") %></td>
         <td><%= fight.updated_at.strftime("%Y %m %d %H:%M:%S") %></td>
-        <td><a href="/play/<%= fight.id %>" class='btn btn-primary'>Watch</a></td>
+        <td><a href="/play/<%= fight.name %>" class='btn btn-primary'>Watch</a></td>
         <td><%= link_to 'Edit', edit_fight_path(fight.name), :class => 'btn btn-primary' %></td>
         <td><%= link_to 'Destroy', fight.name, method: :delete, :class => 'btn btn-danger' %></td>
       </tr>

@@ -195,8 +195,9 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
             if($scope.fight_id == undefined) ajax_add_fight();
             else {
                 ajax.delete_all_armies($scope.fight_id);
-                ajax.flush_armies_to_db($scope.formations, $scope.fight_id);
                 ajax.edit_fight($scope.fight_id, $scope.fight_name);
+                
+                ajax.flush_armies_to_db($scope.formations, $scope.fight_name);
             }
             $scope.saved = true;
         };

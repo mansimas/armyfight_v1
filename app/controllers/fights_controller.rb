@@ -18,7 +18,8 @@ class FightsController < ApplicationController
         targets.push([t.id, t.army_id, t.x, t.y, t.stay_time])
       end
     end
-    render :json => { :status => :ok, :fight => @fight.armies.as_json, :targets => targets.as_json, :name => @fight.name }
+    render :json => { :status => :ok, :fight => @fight.armies.as_json, :targets => targets.as_json, :name => @fight.name } 
+    
   end
 
   def new
@@ -35,7 +36,7 @@ class FightsController < ApplicationController
   def watched_fight
     ActiveRecord::Base.record_timestamps = false
     begin
-      @fight = Fight.find_by_name(params[:id])
+      @fight = Fight.find_by(name: params[:id])
       @fight.watched = @fight.watched.to_i + 1
       @fight.save
     ensure
@@ -52,17 +53,17 @@ class FightsController < ApplicationController
 
   def create
     @fight = Fight.create!(:name => params[:fight_name], :user_id => current_user.id)
-    render :json => { :status => :ok, :fight => @fight.id }
+    render :json => { :status => :ok, :fight => @fight.name }
   end
 
   def update
     @fight.name = params[:fight_name]
     @fight.save!
-    render :json => { :status => :ok, :fight => @fight.id }
+    render :json => { :status => :ok, :fight => @fight.name }
   end
 
   def destroy_armies
-    fight = Fight.find(params[:fight_id])
+    fight = Fight.find_by(name: params[:fight_id])
     fight.armies.destroy_all
     render :json => { :status => :ok, :message => 'destroyed' }
   end
