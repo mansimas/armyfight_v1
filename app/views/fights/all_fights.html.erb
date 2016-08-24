@@ -26,7 +26,7 @@
         <td><%= fight.created_at.strftime("%Y-%m-%d %Hh") %></td>
         <td><%= fight.updated_at.strftime("%Y-%m-%d %Hh") %></td>
         <td><%= fight.watched %></td>
-        <td><a href="/<%= I18n.locale %>/<%= r('homepage.fights.play') %>/<%= fight.name %>"  class='btn btn-primary'>Watch</a></td>
+        <td><a href="/<%= I18n.locale %>/play/<%= fight.name %>"  class='btn btn-primary'><%= r('homepage.fights.play') %></a></td>
         <% if current_user && current_user.nickname == 'mansim' %>
           <td><%= link_to r('homepage.fights.edit'), edit_fight_path(fight.name), :class => 'btn btn-primary' %></td>
           <td><%= link_to r('homepage.fights.destroy'), destroy_fight_path(id: fight.name), :class => 'btn btn-danger' %></td>
