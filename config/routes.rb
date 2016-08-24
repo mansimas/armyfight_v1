@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     ## AJAX FOR TRNALSATIONS
     post 'delete_key' => 'translations#delete_key'
     post 'change_value' => 'translations#change_value'
-    post 'add_language' => 'translations#add_language'
+    post 'add_locale' => 'translations#add_locale'
     post 'delete_locale' => 'translations#delete_locale'
     post 'get_keylist' => 'translations#get_keylist'
 
