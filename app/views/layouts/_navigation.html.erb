@@ -16,8 +16,8 @@
 	      <li><%= link_to r('homepage.top_navigation.watch_fights'), all_fights_path %></li>
 
 	      <% if user_signed_in? %>
-            <li><%= link_to('Your fights', fights_path) %></li>
-            <li><%= link_to 'New fight', new_fight_path %></li>
+            <li><%= link_to r('homepage.top_navigation.your_fights'), fights_path %></li>
+            <li><%= link_to r('homepage.top_navigation.new_fight'), new_fight_path %></li>
 	      <% end %>
 
 	      <% if current_user && current_user.nickname == 'mansim' %>
