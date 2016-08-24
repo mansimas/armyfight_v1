@@ -2,16 +2,16 @@
 <%= render 'layouts/navigation' %>
 <div class="container">
 <div class='col-md-offset-2 col-md-8'>
-<h1 class='text-center'><%= r('fights.all_fights') %></h1>
+<h1 class='text-center'><%= r('homepage.fights.all_fights') %></h1>
 <%= will_paginate @fights, renderer: BootstrapPagination::Rails %>
-<%= link_to r('fights.new_fight'), new_fight_path, :class => 'btn btn-success' %>
+<%= link_to r('homepage.fights.new_fight'), new_fight_path, :class => 'btn btn-success' %>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th><%= r('fights.id') %></th>
-      <th><%= r('fights.name') %></th>
-      <th><%= r('fights.created') %></th>
-      <th><%= r('fights.updated') %></th>
+      <th><%= r('homepage.fights.id') %></th>
+      <th><%= r('homepage.fights.name') %></th>
+      <th><%= r('homepage.fights.created') %></th>
+      <th><%= r('homepage.fights.updated') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>

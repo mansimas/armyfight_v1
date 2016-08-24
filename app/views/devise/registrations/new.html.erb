@@ -3,7 +3,7 @@
 <div class="col-md-12 test-window">
 
     <div class="form-group row">
-        <label class="col-sm-2 col-md-offset-3"><h2><%= r('devise.sign_up') %></h2></label>
+        <label class="col-sm-2 col-md-offset-3"><h2><%= r('homepage.devise.sign_up') %></h2></label>
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -18,18 +18,18 @@
 
 
     <div class="form-group row">
-      <label class="col-sm-3 col-md-offset-3"><%= r('devise.email') %></label>
+      <label class="col-sm-3 col-md-offset-3"><%= r('homepage.devise.email') %></label>
       <div class="col-sm-3">
         <%= f.email_field :email, autofocus: true, :style => 'width: 100%', :class => 'form-control' %>
       </div>
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-3 col-md-offset-3"><%= r('devise.password') %></label>
+      <label class="col-sm-3 col-md-offset-3"><%= r('homepage.devise.password') %></label>
       <div class="col-sm-3">
 
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> <%= r('devise.characters_minimum') %>)</em>
+      <em>(<%= @minimum_password_length %> <%= r('homepage.devise.characters_minimum') %>)</em>
       <% end %><br />
         <%= f.password_field :password, autocomplete: "off", :style => 'width: 100%', :class => 'form-control' %>
       </div>
@@ -38,7 +38,7 @@
     <% if devise_mapping.rememberable? -%>
         <div class="form-group row">
           <label class="col-sm-3 col-md-offset-3">
-              <%= r('devise.password_confirmation') %>
+              <%= r('homepage.devise.password_confirmation') %>
           </label>
 
           <div class="col-sm-3">
@@ -48,7 +48,7 @@
     <% end -%>
 
     <div class="form-group row">
-      <label class="col-sm-3 col-md-offset-3"><%= r('devise.nickname') %></label>
+      <label class="col-sm-3 col-md-offset-3"><%= r('homepage.devise.nickname') %></label>
       <div class="col-sm-3">
         <%= f.text_field :nickname, :style => 'width: 100%', :class => 'form-control', :required => true %>
       </div>
@@ -56,7 +56,7 @@
 
     <div class="form-group row">
       <div class="col-sm-offset-3 col-sm-4 ">
-        <%= f.submit r('devise.sign_up'), :class => 'btn btn-success', :style => 'width:100%' %>
+        <%= f.submit r('homepage.devise.sign_up'), :class => 'btn btn-success', :style => 'width:100%' %>
       </div>
     </div>
 

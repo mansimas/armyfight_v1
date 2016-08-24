@@ -2,17 +2,17 @@
 <div class='col-md-offset-2 col-md-8'>
 
 <%= will_paginate @fights, renderer: BootstrapPagination::Rails %>
-<h1 class='text-center'><%= r('all_fights.all_fights') %></h1>
-<%= link_to r('all_fights.new_fight'), new_fight_path, :class => 'btn btn-success' %>
+<h1 class='text-center'><%= r('homepage.all_fights.all_fights') %></h1>
+<%= link_to r('homepage.all_fights.new_fight'), new_fight_path, :class => 'btn btn-success' %>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th><%= r('all_fights.id') %></th>
-      <th><%= r('all_fights.name') %></th>
-      <th><%= r('all_fights.user') %></th>
-      <th><%= r('all_fights.created') %></th>
-      <th><%= r('all_fights.updated') %></th>
-      <th><%= r('all_fights.watched') %></th>
+      <th><%= r('homepage.all_fights.id') %></th>
+      <th><%= r('homepage.all_fights.name') %></th>
+      <th><%= r('homepage.all_fights.user') %></th>
+      <th><%= r('homepage.all_fights.created') %></th>
+      <th><%= r('homepage.all_fights.updated') %></th>
+      <th><%= r('homepage.all_fights.watched') %></th>
       <th></th>
     </tr>
   </thead>

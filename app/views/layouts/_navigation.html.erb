@@ -8,12 +8,12 @@
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	    </button>
-	    <%= link_to r('navigation.armyfight'), root_path, class: "navbar-brand" %>
+	    <%= link_to r('homepage.top_navigation.armyfight'), root_path, class: "navbar-brand" %>
 	  </div>
 	  <div id="navbar" class="navbar-collapse collapse">
 	    <ul class="nav navbar-nav">
-	      <li class="active"><%= link_to r('navigation.home'), root_path %></li>
-	      <li><%= link_to r('navigation.watch_fights'), all_fights_path %></li>
+	      <li class="active"><%= link_to r('homepage.top_navigation.home'), root_path %></li>
+	      <li><%= link_to r('homepage.top_navigation.watch_fights'), all_fights_path %></li>
 
 	      <% if user_signed_in? %>
             <li><%= link_to('Your fights', fights_path) %></li>
@@ -21,7 +21,7 @@
 	      <% end %>
 
 	      <% if current_user && current_user.nickname == 'mansim' %>
-	      	  <li><%= link_to r('navigation.translations'), translations_path %></li>
+	      	  <li><%= link_to r('homepage.top_navigation.translations'), translations_path %></li>
 	      <% end %>
 
 	    </ul>
@@ -29,16 +29,16 @@
 
 	    	<% ($redis.hkeys 'languages').each do |lang| %>
                 <% if path_exists?(lang) %>
-                <li><%= link_to "#{r('top_navigation.'+lang)}", url_for(params.merge({:locale => lang})) %></li>
+                <li><%= link_to r('homepage.top_navigation.' + lang), url_for(params.merge({:locale => lang})) %></li>
                 <% end %>
             <% end %>
 
 
 	        <% if user_signed_in? %>
-	        	<li class="active"><%= link_to r('navigation.sign_out') + " #{current_user.nickname}", destroy_user_session_path, :method => :delete %></li>
+	        	<li class="active"><%= link_to r('homepage.top_navigation.sign_out') + " #{current_user.nickname}", destroy_user_session_path, :method => :delete %></li>
 	        <% else %>
-	        	<li class="active"><%= link_to r('navigation.log_in') , new_session_path(:user) %></li>
-	        	<li><%= link_to r('navigation.sign_up'), new_registration_path(:user) %></li>
+	        	<li class="active"><%= link_to r('homepage.top_navigation.log_in') , new_session_path(:user) %></li>
+	        	<li><%= link_to r('homepage.top_navigation.sign_up'), new_registration_path(:user) %></li>
 	        <% end %>
 	    </ul>
 	  </div>

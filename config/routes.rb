@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post 'change_value' => 'translations#change_value'
     post 'add_language' => 'translations#add_language'
     post 'delete_locale' => 'translations#delete_locale'
+    post 'get_keylist' => 'translations#get_keylist'
 
   end
   get '*path', to: redirect("/#{(I18n.locale)}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.locale}/" }
