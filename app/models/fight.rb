@@ -3,7 +3,4 @@ class Fight < ActiveRecord::Base
 	validates_uniqueness_of :name
 	belongs_to :user
 	has_many :armies, :dependent => :destroy
-	def to_param
-	    name
-	end
 end
