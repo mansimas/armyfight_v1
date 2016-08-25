@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get 'destroy_fight' => 'fights#destroy'
     get 'destroy_army' => 'armies#destroy'
 
+    get 'destroy_session' => 'sessions#destroy'
+
     ## AJAX FOR ARMIES
     post 'destroy_armies' => 'fights#destroy_armies'
     get 'all_fights' => 'fights#all_fights'
