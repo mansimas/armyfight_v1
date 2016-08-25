@@ -11,7 +11,7 @@ class FightsController < ApplicationController
   end
 
   def show
-    @fight = Fight.find_by_name(params[:id])
+    @fight = Fight.find_by_id(params[:id])
     targets = []
     @fight.armies.each do |a|
       a.targets.each do |t|
@@ -27,7 +27,7 @@ class FightsController < ApplicationController
   end
 
   def play
-    @fight = Fight.find_by_name(params[:id])
+    @fight = Fight.find_by_id(params[:id])
     if !@fight
       redirect_to root_path
     end
@@ -36,7 +36,7 @@ class FightsController < ApplicationController
   def watched_fight
     ActiveRecord::Base.record_timestamps = false
     begin
-      @fight = Fight.find_by(name: params[:id])
+      @fight = Fight.find_by(id: params[:id])
       @fight.watched = @fight.watched.to_i + 1
       @fight.save
     ensure
@@ -53,17 +53,17 @@ class FightsController < ApplicationController
 
   def create
     @fight = Fight.create!(:name => params[:fight_name], :user_id => current_user.id)
-    render :json => { :status => :ok, :fight => @fight.name }
+    render :json => { :status => :ok, :fight => @fight.id }
   end
 
   def update
     @fight.name = params[:fight_name]
     @fight.save!
-    render :json => { :status => :ok, :fight => @fight.name }
+    render :json => { :status => :ok, :fight => @fight.id }
   end
 
   def destroy_armies
-    fight = Fight.find_by(name: params[:fight_id])
+    fight = Fight.find_by(id: params[:fight_id])
     fight.armies.destroy_all
     render :json => { :status => :ok, :message => 'destroyed' }
   end
@@ -71,14 +71,14 @@ class FightsController < ApplicationController
   def destroy
     @fight.destroy
     respond_to do |format|
-      format.html { redirect_to all_fights_url }
+      format.html { redirect_to fights_url }
       format.json { head :no_content }
     end
   end
 
   private
     def set_fight
-      @fight = Fight.find_by(name: params[:id])
+      @fight = Fight.find_by(id: params[:id])
     end
 
     def fight_params

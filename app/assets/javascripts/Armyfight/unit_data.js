@@ -127,8 +127,9 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
          this.formation_changed();
     }
 
+
     UnitData.prototype.remove_army = function(formation, key) {
-        if(this.core.selected_army.unit_type == formation && this.core.selected_army.id == key) {
+        if(this.core.selected_army && this.core.selected_army.unit_type == formation && this.core.selected_army.id == key) {
             this.core.selected_army = {};
         }
         this.formation_changed();

@@ -16,12 +16,6 @@ class ArmiesController < ApplicationController
   end
 
   def create
-    puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-    puts params
-    id = Fight.find_by(name: params[:fight_id]).id
-    params[:fight_id] = id
-    puts 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
-    puts params
     @army = Army.new
     @army.create_army(params)
     @army.save

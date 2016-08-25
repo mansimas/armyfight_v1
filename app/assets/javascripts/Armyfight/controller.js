@@ -192,14 +192,23 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
     // ajax functions
     //
         $scope.save_fight = function() {
-            if($scope.fight_id == undefined) ajax_add_fight();
-            else {
-                ajax.delete_all_armies($scope.fight_id);
-                ajax.edit_fight($scope.fight_id, $scope.fight_name);
-                
-                ajax.flush_armies_to_db($scope.formations, $scope.fight_name);
+            if($scope.fight_name) {
+                if($scope.fight_id == undefined) ajax_add_fight();
+                else {
+                    ajax.delete_all_armies($scope.fight_id);
+                    ajax.edit_fight($scope.fight_id, $scope.fight_name);
+                    
+                    ajax.flush_armies_to_db($scope.formations, $scope.fight_id);
+                }
+                $scope.saved = true;
+            } else {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                for( var i=0; i < 5; i++ )
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                $scope.fight_name = text;
+                $scope.save_fight();
             }
-            $scope.saved = true;
         };
 
         function ajax_add_fight() {
