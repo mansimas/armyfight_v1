@@ -1,2 +1,12 @@
 
 this project is now located at https://armyfight.herokuapp.com
+
+launching redis server is a must: go to root path. Run `redis-server`
+to initialize ckeditor: rails generate ckeditor:install --orm=active_record --backend=paperclip
+	  Running via Spring preloader in process 10355
+      create  config/initializers/ckeditor.rb
+       route  mount Ckeditor::Engine => '/ckeditor'
+      create  app/models/ckeditor/asset.rb
+      create  app/models/ckeditor/picture.rb
+      create  app/models/ckeditor/attachment_file.rb
+      create  db/migrate/20160826213231_create_ckeditor_assets.rb

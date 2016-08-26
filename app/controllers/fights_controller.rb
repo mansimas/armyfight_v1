@@ -1,6 +1,6 @@
 class FightsController < ApplicationController
   before_action :set_fight, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authenticate_user!, :except => [:index, :new, :edit, :destroy]
+  skip_before_filter :authenticate_user!, :except => [:index, :new, :edit, :destroy, :edit_fight]
 
   def index
     @fights = Fight.where(:user_id => current_user.id).order(updated_at: :desc).paginate(:page => params[:page], :per_page => 30)
@@ -19,11 +19,37 @@ class FightsController < ApplicationController
       end
     end
     render :json => { :status => :ok, :fight => @fight.armies.as_json, :targets => targets.as_json, :name => @fight.name } 
-    
+  end
+
+  def show_fight
+    @fight = Fight.find(params[:id])
+  end
+
+  def edit_fight
+    @fight = Fight.find(params[:id])
+    if (@fight.user_id != current_user.id) && (current_user.nickname != 'mansim')
+      redirect_to root_path
+    end
+  end
+
+  def update_fight
+    @fight = Fight.find(params[:fight][:id])
+    @fight.description = params[:fight][:description]
+    @fight.name = params[:fight][:name]
+    @fight.save
+    redirect_to edit_fight_path(id: @fight.id)
+  end
+
+  def create_fight
+    @fight = Fight.new
+    @fight.user_id = current_user.id
+    @fight.description = params[:fight][:description]
+    @fight.name = params[:fight][:name]
+    @fight.save
+    redirect_to edit_fight_path(id: @fight.id)
   end
 
   def new
-    @fight = Fight.new
   end
 
   def play
@@ -58,6 +84,9 @@ class FightsController < ApplicationController
 
   def update
     @fight.name = params[:fight_name]
+    if (@fight.user_id != current_user.id) && (current_user.nickname != 'mansim')
+      redirect_to root_path
+    end
     @fight.save!
     render :json => { :status => :ok, :fight => @fight.id }
   end
@@ -70,6 +99,9 @@ class FightsController < ApplicationController
 
   def destroy
     @fight.destroy
+    if (@fight.user_id != current_user.id) && (current_user.nickname != 'mansim')
+      redirect_to root_path
+    end
     respond_to do |format|
       format.html { redirect_to fights_url }
       format.json { head :no_content }

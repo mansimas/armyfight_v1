@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   scope ":locale", locale: /#{I18n.config.available_locales.join("|")}/ do
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
     get 'destroy_army' => 'armies#destroy'
 
     get 'destroy_session' => 'sessions#destroy'
+    get 'watch/:id' => 'fights#show_fight'
+    get 'edit_fight/:id' => 'fights#edit_fight'
+    patch 'update_fight' => 'fights#update_fight'
+    post 'create_fight' => 'fights#create_fight'
 
     ## AJAX FOR ARMIES
     post 'destroy_armies' => 'fights#destroy_armies'

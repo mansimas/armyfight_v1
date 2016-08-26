@@ -1,3 +1,51 @@
-<div data-ng-app="app" data-ng-controller="game" data-ng-init='new_fight_starting()'>
-	<%= render 'edit_form' %>
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= render 'layouts/navigation' %>
+<div class='container' style='width: 50%'>
+
+	<div class="row">
+    <div class='col-md-offset-4 col-md-8'>
+    	<h2><%= r('homepage.fights.create_new_fight') %></h2>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+	<%= form_for Fight.new, :url => create_fight_path do |f| %>
+
+	  <div class="row">
+	    <div class='col-md-2'>
+	    	<%= r('homepage.fights.name') %>: 
+	    </div>
+	    <div class='col-md-8'>
+	    	<%= f.text_field :name, class: 'form-control', style: 'width: 100%' %>
+	    </div>
+	  </div>
+
+	  <br>
+	  <br>
+
+	  <div class="row">
+	  	<div class='col-md-2'>
+	    	<%= r('homepage.fights.description') %>: 
+	    </div>
+	    <div class='col-md-8'>
+	    <%= f.cktext_area :description, class: 'form-control', style: 'width: 100%' %>
+	    </div>
+	  </div>
+
+	  <br>
+	  <br>
+
+	  <div class="row">
+	  	<div class='col-md-offset-2 col-md-8'>.
+	  	   <div class="actions">
+		    <%= f.submit r('homepage.fights.save_and_next'), class: 'btn btn-success' ,style: 'width: 100%' %>
+		  </div>
+	  	</div>
+	  </div>
+
+	 
+	<% end %>
 </div>

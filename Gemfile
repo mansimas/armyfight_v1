@@ -5,7 +5,6 @@ gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg', '~> 0.15'
@@ -23,3 +22,5 @@ gem 'will_paginate-bootstrap'
 gem 'heroku'
 gem 'rails_12factor', group: :production
 gem 'redis'
+gem 'paperclip'
+gem 'ckeditor'
