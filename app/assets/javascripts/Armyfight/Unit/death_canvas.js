@@ -35,6 +35,7 @@ death_canvas.factory('death_canvas', ['draggable_armies', function (DraggableArm
                 unit[0]['move_x']
             );
             this.died_units[x][1]--; 
+            
         }
     };
 

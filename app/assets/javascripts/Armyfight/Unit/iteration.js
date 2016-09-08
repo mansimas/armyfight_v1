@@ -39,15 +39,18 @@ iteration.factory('iteration', ['helper', function (Helper) {
                         } else {
                             delete self[type][y][x];
                             var random_direction = Math.floor(Math.random() * 8);
-                            self.died_units.push([{
-                                    x: unit.x,
-                                    y: unit.y,
-                                    move_y: unit.move_y,
-                                    team: unit.team,
-                                    random_direction: random_direction,
-                                    move_x: unit.move_x
-                                }, 16]
-                            );
+                            if(unit.stats.unit == 'sword') {
+                                self.died_units.push([{
+                                        x: unit.x,
+                                        y: unit.y,
+                                        move_y: unit.move_y,
+                                        team: unit.team,
+                                        random_direction: random_direction,
+                                        move_x: unit.move_x,
+                                        unit: unit.stats.unit
+                                    }, 16]
+                                );
+                            }
                         }
                     }
                 });
