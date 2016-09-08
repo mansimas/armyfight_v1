@@ -72,7 +72,6 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
             this.core.draw_deaths();
             this.core.calculate_units();  
         } else { this.formation_changed(); }
-        if(this.set_target) { this.draw_cursor(); }
     }
 
 //
@@ -117,9 +116,8 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
         this.generate_core(this.formations, this.core.selected_army, {}, {});
         this.core.calculate_units();
         this.core.draw_army_borders(this.ctx);
-        this.draw_targets();
+        if(this.editing) this.draw_targets();
         this.core.fix_canvas_size(this.ctx.canvas.width, this.ctx.canvas.height);
-        if(this.set_target) { this.draw_cursor(); }
     }
 
     UnitData.prototype.deselect_army = function() {

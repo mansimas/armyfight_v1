@@ -261,7 +261,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         }
 
         function do_interval() {
-            if($scope.attacking == true || ud.set_target == true) {
+            if($scope.attacking == true) {
                 animate();
                 ud.frame++;
             }

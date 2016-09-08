@@ -24,30 +24,6 @@ targets_cursor.factory('targets_cursor', [function() {
         return (this.last_cursor_pos.x == mousePos.x && this.last_cursor_pos.y == mousePos.y); 
     }
 
-    TargetsCursor.prototype.draw_cursor = function() {
-		var centerX = this.cursor_position.x - this.radius/2;
-		var centerY = this.cursor_position.y - this.radius/2;
-
-		this.ctx.beginPath();
-		this.ctx.arc(centerX, centerY, this.radius, 0, 2 * Math.PI, false);
-		this.ctx.fillStyle = '#836FFF';
-		this.ctx.fill();
-		this.ctx.lineWidth = 3;
-		this.ctx.strokeStyle = '#4876FF';
-		this.ctx.stroke();
-
-		if(this.radius_direction == -1 && this.radius > 3) {
-			this.radius--;
-		} else if (this.radius_direction == -1 && this.radius <= 3) {
-			this.radius_direction = 1;
-		} else if (this.radius_direction == 1 && this.radius <= 10) {
-			this.radius++;
-		} else if (this.radius_direction == 1 && this.radius > 10) {
-			this.radius_direction = -1;
-		}
-
-    }
-
     TargetsCursor.prototype.draw_targets = function() {
         var self = this;
         _.each(['enemy', 'ally'], function(type) {
