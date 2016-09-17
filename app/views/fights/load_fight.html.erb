@@ -1,0 +1,19 @@
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= render 'layouts/navigation' %>
+
+  <div data-ng-app="app" data-ng-controller="game" data-ng-init = "fight_playing('<%= @fight.id %>')">
+
+    <%= render 'fights/images' %>
+    <%= render 'fights/canvas_elements' %>
+
+    <div style='float:left; position:absolute'>
+      <%= link_to r('homepage.fights.start_fight_loading'), fight_loading_path(id: @fight), class: 'btn btn-success' %>
+      <button class="btn btn-primary" data-ng-click="animate()" ><%= r('homepage.fights.animate') %></button>
+      <button class="btn btn-primary" data-ng-click="log()" ><%= r('homepage.fights.log') %></button>
+      <button class="btn btn-primary" data-ng-show='!attacking' data-ng-click="start_attack()"><%= r('homepage.fights.start_attack') %></button>
+      <button class="btn btn-primary" data-ng-show='attacking' data-ng-click="start_attack()"><%= r('homepage.fights.stop') %></button>
+
+    </div>
+  </div>
+

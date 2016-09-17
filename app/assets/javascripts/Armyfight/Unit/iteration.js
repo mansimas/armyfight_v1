@@ -12,7 +12,6 @@ iteration.factory('iteration', ['helper', function (Helper) {
 
         var numbers =       { ally: 0,         enemy: 0          };
         var group =         { ally: self.ally, enemy: self.enemy };
-        var died_units =    [];
 
         _.each(['enemy', 'ally'], function(type) {
             _.each(group[type], function (val, y) {
@@ -23,18 +22,43 @@ iteration.factory('iteration', ['helper', function (Helper) {
                         x = parseInt(x);
                         unit.setAllyEnemy(self.ally, self.enemy);
                         if (unit.survived()) {
+                            var changed = false;
+
                             if (unit['target'] == undefined || 
                                 (unit['target']['stats'] && unit['target']['stats']['hp'] < 1)) {
+                                console.log(x, y, 'found target', unit['target']);
+
                                 unit['target'] = search_for_target(closest_y, self, unit);
+                                changed = true;
                             }
+
+                            if( (parseInt(x) != unit['x']) || (parseInt(y) != unit['y']) ) {
+                                if(unit.status != 1) {
+                                    unit.status = 1;
+                                    changed = true;
+                                    console.log(x, y, 'unit status is from 0 to 1');
+                                }
+                                
+                                delete self[type][y][x];
+                                if(!_.has(self[type], unit['y'])) self[type][unit['y']] = {};
+                            } else {
+                                if(unit.status != 0) {
+                                    unit.status = 0;
+                                    changed = true;
+                                    console.log(x, y, 'unit status is from 1 to 0');
+                                }
+                            }
+
                             unit.draw(
                                 self.ctx, self.unit_width, self.drag_x, self.drag_y, 
                                 self.image[unit['stats']['unit']], self.image_graphics_width, self.image_graphics_height
                             );
-                            if( (parseInt(x) != unit['x']) || (parseInt(y) != unit['y']) ) {
-                                delete self[type][y][x];
-                                if(!_.has(self[type], unit['y'])) self[type][unit['y']] = {};
+
+                            if(changed == true) {
+                                if(!_.has(self.changed_units, unit['x'])) self.changed_units[unit['x']] = {};
+                                self.changed_units[unit['x']][unit['y']] = unit;
                             }
+
                             self[type][unit['y']][unit['x']] = unit;
                         } else {
                             delete self[type][y][x];
@@ -143,40 +167,7 @@ iteration.factory('iteration', ['helper', function (Helper) {
         this.countEnemy = numbers['enemy'];
     };
 
-    Iteration.prototype.retarget_units = function() {
-
-        var new_positions = { ally: {},        enemy: {}         };
-        var numbers =       { ally: 0,         enemy: 0          };
-        var group =         { ally: this.ally, enemy: this.enemy };
-        var self = this;
-
-        _.each(['ally', 'enemy'], function(type) {
-            _.each(group[type], function (val, y) {
-                y = parseInt(y);
-                _.each(val, function (unit, x) {
-                    unit.setAllyEnemy(self.ally, self.enemy);
-                    numbers[type]++;
-                    unit.distance_x = self.distance_x;
-                    unit.distance_y = self.distance_y;
-                    unit['target'] = undefined;
-                    unit.draw(self.ctx, self.unit_width, self.drag_x, self.drag_y, self.image[unit['stats']['unit']], 
-                        self.image_graphics_width, self.image_graphics_height);
-                    if (!_.has(new_positions[type], unit['y'])) {
-                        new_positions[type][unit['y']] = {};
-                        new_positions[type][unit['y']][unit['x']] = unit;
-                    } else {
-                        new_positions[type][unit['y']][unit['x']] = unit;
-                    }
-                });
-            });
-        });
-
-
-        this.ally       = new_positions['ally'];
-        this.enemy      = new_positions['enemy'];
-        this.countAlly  = numbers['ally'];
-        this.countEnemy = numbers['enemy'];
-    };
+ 
 
     return Iteration;
 }]);

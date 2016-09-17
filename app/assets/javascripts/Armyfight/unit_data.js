@@ -10,14 +10,15 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 // Mouse events
 //
     UnitData.prototype.mouse_down = function(evt) {
+
         var mousePos = this.getMousePos(this.canvas, evt);
         if(this.editing) {
             this.army_drag_x_first = evt.pageX;
             this.army_drag_y_first = evt.pageY;
-            this.core.check_draggable_army(mousePos.x, mousePos.y);
+            this.check_draggable_army(mousePos.x, mousePos.y);
         }
         if(this.set_target) { this.set_last_cursor_pos(evt); }
-        if(!_.isEmpty(this.core.selected_army)) {
+        if(!_.isEmpty(this.selected)) {
             this.drag_army = true;
             return 1;
         } else {
@@ -39,6 +40,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
     }
 
     UnitData.prototype.mouse_move = function(evt) {
+
         if(this.editing) { this.formation_changed(); }
         if(this.set_target) { this.set_cursor_pos(evt); }
         if(this.drag_screen) {
@@ -49,8 +51,8 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
              } else if(this.editing) {
                 return ['change_formation', {}];
             }
-        } else if(this.drag_army && !_.isEmpty(this.core.selected_army)) {
-            var result = this.core.drag_army(evt);
+        } else if(this.drag_army && !_.isEmpty(this.selected)) {
+            var result = this.drag_armies(evt);
             this.army_drag_x_first = evt.pageX;
             this.army_drag_y_first = evt.pageY;
             return ['giving_result', result];
@@ -68,6 +70,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
     UnitData.prototype.animate = function() {
         this.clear_canvas();
         this.draw_background();
+
         if(!this.editing) {
             this.core.draw_deaths();
             this.core.calculate_units();  
@@ -78,6 +81,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 // Canvas resize functions
 //    
     UnitData.prototype.edit_window_size = function() {
+
         this.ctx.canvas.width =  $(window).width() - 120;
         this.bg_ctx.canvas.width =  $(window).width() - 120;
         this.ctx.canvas.height =  $(window).height() - $(window).height()/10;
@@ -113,22 +117,25 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 //
     UnitData.prototype.formation_changed = function() {
         this.draw_background();
-        this.generate_core(this.formations, this.core.selected_army, {}, {});
-        this.core.calculate_units();
-        this.core.draw_army_borders(this.ctx);
-        if(this.editing) this.draw_targets();
-        this.core.fix_canvas_size(this.ctx.canvas.width, this.ctx.canvas.height);
+        if(this.editing) {
+            this.clear_canvas();
+            this.draw_army_borders(this.ctx);
+            this.draw_targets(); 
+            this.core.fix_canvas_size(this.ctx.canvas.width, this.ctx.canvas.height);
+        } else {
+            this.redraw_core();
+        }
     }
 
     UnitData.prototype.deselect_army = function() {
-         this.core.selected_army = {};
+         this.selected = {};
          this.formation_changed();
     }
 
 
     UnitData.prototype.remove_army = function(formation, key) {
-        if(this.core.selected_army && this.core.selected_army.unit_type == formation && this.core.selected_army.id == key) {
-            this.core.selected_army = {};
+        if(this.selected && this.selected.unit_type == formation && this.selected.id == key) {
+            this.selected = {};
         }
         this.formation_changed();
     }
@@ -137,7 +144,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
         if(this.editing && !_.isEmpty(unit)) {
             this.drag_x = -300 + parseInt(unit.x) * this.distance_x;
             this.drag_y = -480 + parseInt(unit.y) * this.distance_y;
-            this.core.selected_army = unit;
+            this.selected = unit;
             this.formation_changed();
         }
     }
@@ -152,16 +159,9 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 //
 // Fight watch functions
 //
-    UnitData.prototype.start_attack = function(formations) {
-        this.first_attack = false;
-        this.generate_core(this.formations, {}, this.temp_ally, this.temp_enemy);
-        this.temp_ally = {};
-        this.temp_enemy = {};
-    }
-
-    UnitData.prototype.generate_core = function(formations, selected, temp_ally, temp_enemy) {
+    UnitData.prototype.generate_core = function(formations, temp_ally, temp_enemy) {
         this.clear_canvas();
-        this.core = new Core(this, formations, selected, temp_ally, temp_enemy);
+        this.core = new Core(this, formations, temp_ally, temp_enemy);
         this.core.initiate();
     }
 

@@ -1,5 +1,5 @@
-var death_canvas = angular.module('death_canvas', ['draggable_armies']);
-death_canvas.factory('death_canvas', ['draggable_armies', function (DraggableArmies) {
+var death_canvas = angular.module('death_canvas', []);
+death_canvas.factory('death_canvas', [function () {
     'use strict';
 
     function DeathCanvas() {
@@ -7,8 +7,6 @@ death_canvas.factory('death_canvas', ['draggable_armies', function (DraggableArm
         this.dth_ctx = death_canvas.getContext("2d");
         this.died_units = [];
     }
-
-    DeathCanvas.prototype = new DraggableArmies();
 
     DeathCanvas.prototype.clear_dth_canvas = function() {
         this.dth_ctx.clearRect(0, 0, this.dth_ctx.canvas.width, this.dth_ctx.canvas.height);

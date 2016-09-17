@@ -1,5 +1,5 @@
-var targets_cursor = angular.module('targets_cursor', []);
-targets_cursor.factory('targets_cursor', [function() {
+var targets_cursor = angular.module('targets_cursor', ['draggable_armies']);
+targets_cursor.factory('targets_cursor', ['draggable_armies', function(DraggableArmies) {
     'use strict';
 
     function TargetsCursor() {
@@ -7,6 +7,8 @@ targets_cursor.factory('targets_cursor', [function() {
     	this.radius_direction = -1;
     	this.last_cursor_pos = {x: 0, y: 0};
     }
+
+    TargetsCursor.prototype = new DraggableArmies();
 
     TargetsCursor.prototype.set_cursor_pos = function(evt) {
         var mousePos = this.getMousePos(this.canvas, evt);

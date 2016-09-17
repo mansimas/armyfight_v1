@@ -10,6 +10,15 @@ class FightsController < ApplicationController
     @fights = Fight.all.order(updated_at: :desc).paginate(:page => params[:page], :per_page => 30)
   end
 
+  def load_fight
+    @fight = Fight.find(params[:id])
+  end
+
+  def start_fight_loading
+    puts 'aaaaaaaaaaaaaaa'
+    redirect_to load_fight_path(id: params[:id])
+  end
+
   def show
     @fight = Fight.find_by_id(params[:id])
     targets = []

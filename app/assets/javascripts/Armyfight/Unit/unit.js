@@ -8,11 +8,11 @@ unit.factory('units', ['parent_unit', function (parent_unit) {
         this.move_x = 0;
         this.direction_y = 0;
         this.direction_x = 0;
-        this.target = undefined;
+        this.target = undefined; //
         this.team = team;
-        this.stopped = false;
+        this.stopped = false; //
         this.stats = stats;
-        this.attacking = 0;
+        this.attacking = 0; //
         this.killed = 0;
         this.facedirection = 0;
         this.frame = 16;
@@ -25,6 +25,7 @@ unit.factory('units', ['parent_unit', function (parent_unit) {
         this.target_id = 0;
         this.waiting = false;
         this.waiting_time = 0;
+        this.status = 0;
     }
     Unit.prototype = new parent_unit();
 
@@ -88,17 +89,19 @@ parent_unit.factory('parent_unit', function () {
                     if(this.attacking['attacking'] == 0) {
                         this.attacking['attacking'] = this.ally[this.y][this.x];
                         this.attacking['target'] = this.ally[this.y][this.x];
+                       
                     }
                     if(this.attacking['stats']['hp'] < 1) {
                         this.killed += 1;
                     }
-                } else {
+                } else if(this.attacking != 0) {
                     this.attacking = 0;
                 }
             }
         } else {
             if (!this.find_opponent()) {
                 if(this.target && this.x == this.target.x && this.y == this.target.y) {
+                   
                     this.waiting = true;
                 } else {
                     this.try_moving();

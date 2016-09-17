@@ -17,6 +17,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.formations = ud.get_formations('both');
         $scope.images_to_show = 2;
         $scope.army_view = 3;
+        $scope.frame = 0;
 
     //
     // Mouse events
@@ -34,6 +35,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
 
         ud.canvas.addEventListener('mousemove', function(evt) {
             var mouse_move = ud.mouse_move(evt);
+
             if(mouse_move[0] == 'change_formation') ud.formation_changed();
             else if (mouse_move[0] == 'giving_result') {
                 var result = mouse_move[1];
@@ -46,7 +48,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
 
         function prepare_selected_army(value) {
             if(value == 1) {
-                var selected = ud.core.selected_army;
+                var selected = ud.selected_army;
                 $scope.unit_for_stats_change = $scope.formations[selected.unit_type][selected.id];
                 ud.formation_changed();
             }
@@ -93,9 +95,9 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         }
 
         $scope.change_unit_stats = function(unit, id) {
-            ud.core.selected_army = $scope.formations[unit][id];
-            ud.core.selected_army.unit_type = unit;
-            ud.core.selected_army.id = id;
+            ud.selected = $scope.formations[unit][id];
+            ud.selected.unit_type = unit;
+            ud.selected.id = id;
             $scope.unit_for_stats_change = $scope.formations[unit][id];
             $scope.unit_for_stats_change.unit_type = unit;
             $scope.unit_for_stats_change.id = id;
@@ -117,7 +119,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
             if(ud.first_attack) {
                 $scope.visible = false;
                 $scope.stats_visible = false;
-                ud.start_attack($scope.formations);
+                ud.first_attack = false;
             }
         };
 
@@ -244,11 +246,13 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         }, true);
 
         $scope.$watch('unit_for_stats_change', function(newVal, oldVal){
-            ud.unit_for_stats_change = $scope.unit_for_stats_change;
-            ud.formation_changed();
+            if(!ud.first_attack) {
+                ud.unit_for_stats_change = $scope.unit_for_stats_change;
+                ud.formation_changed();
+            }
         }, true);
 
-        $scope.log = function() { ud.log() };
+        $scope.log = function() { console.log(ud.log()); };
 
     //
     // Fight begin functions
@@ -262,13 +266,16 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
 
         function do_interval() {
             if($scope.attacking == true) {
-                animate();
+                $scope.animate();
                 ud.frame++;
             }
         }
 
-        function animate() {
+        $scope.animate = function() {
+            ud.core.changed_units = [];
             ud.animate();
+            $scope.frame ++;
+            console.log(ud.core.changed_units);
             $scope.countAlly = ud.core.getCountAlly();
             $scope.countEnemy = ud.core.getCountEnemy();
         }
@@ -281,8 +288,9 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         });
 
         function load_all_images() {
-          start_animation_loop();
-          ajax.count_fight_watches($scope.fight_id);
+            ud.generate_core(ud.formations, {}, {});
+            start_animation_loop();
+            ajax.count_fight_watches($scope.fight_id);
         };
 
 }]);

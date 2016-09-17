@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     patch 'update_fight' => 'fights#update_fight'
     post 'create_fight' => 'fights#create_fight'
 
+    get '/load_fight/:id', :to => 'fights#load_fight', :as => :load_fight
+    get 'fight_loading' => 'fights#start_fight_loading'
+
+
     ## AJAX FOR ARMIES
     post 'destroy_armies' => 'fights#destroy_armies'
     get 'all_fights' => 'fights#all_fights'

@@ -23,6 +23,7 @@
         <th><%= fight.name if fight.name %></th>
         <td><%= fight.created_at.strftime("%Y %m %d %H:%M:%S") %></td>
         <td><%= fight.updated_at.strftime("%Y %m %d %H:%M:%S") %></td>
+        <td><a href="/<%= I18n.locale %>/load_fight/<%= fight.id %>" class='btn btn-success'><%= r('homepage.fights.load') %></a></td>
         <td><a href="/<%= I18n.locale %>/watch/<%= fight.id %>" class='btn btn-primary'><%= r('homepage.fights.watch') %></a></td>
         <td><a href="/<%= I18n.locale %>/edit_fight/<%= fight.id %>"  class='btn btn-primary'><%= r('homepage.fights.edit') %></a></td>
         <td><%= link_to r('homepage.fights.destroy'), destroy_fight_path(id: fight.id), :class => 'btn btn-danger' %></td>

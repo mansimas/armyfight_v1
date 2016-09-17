@@ -2,7 +2,7 @@ var core = angular.module('core', ['units', 'iteration']);
 core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
     'use strict';
 
-    function Core(ud, formations, selected, temp_ally, temp_enemy) {
+    function Core(ud, formations, temp_ally, temp_enemy) {
         this.images_to_show = ud.images_to_show;
         this.multiplied = ud.multiplied;
         this.ally = temp_ally;
@@ -21,9 +21,9 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
         this.army_drag_x_first = ud.army_drag_x_first;
         this.army_drag_y_first = ud.army_drag_y_first;
         this.image = ud.image;
-        this.selected_army = selected;
         this.image_graphics_width = ud.image_graphics_width;
         this.image_graphics_height = ud.image_graphics_height;
+        this.changed_units = {};
     }
 
     Core.prototype = new Iteration();
