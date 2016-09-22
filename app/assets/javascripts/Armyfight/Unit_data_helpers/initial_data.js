@@ -258,7 +258,7 @@ initial_data.factory('initial_data', ['bg_canvas', function (BgCanvas) {
     }
 
     InitialData.prototype.log = function() {
-        console.log(this.core.ally, this.core.enemy);
+        console.log('ally', this.core.ally, 'enemy', this.core.enemy);
     }
 
     return InitialData;

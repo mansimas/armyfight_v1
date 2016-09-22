@@ -252,7 +252,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
             }
         }, true);
 
-        $scope.log = function() { console.log(ud.log()); };
+        $scope.log = function() { ud.log(); };
 
     //
     // Fight begin functions
@@ -267,17 +267,18 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         function do_interval() {
             if($scope.attacking == true) {
                 $scope.animate();
-                ud.frame++;
             }
         }
 
         $scope.animate = function() {
-            ud.core.changed_units = [];
             ud.animate();
-            $scope.frame ++;
-            console.log(ud.core.changed_units);
+            ud.frame ++;
             $scope.countAlly = ud.core.getCountAlly();
             $scope.countEnemy = ud.core.getCountEnemy();
+        }
+
+        $scope.frame = function() {
+            return ud.frame;
         }
 
     //

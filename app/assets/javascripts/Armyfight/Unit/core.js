@@ -2,7 +2,7 @@ var core = angular.module('core', ['units', 'iteration']);
 core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
     'use strict';
 
-    function Core(ud, formations, temp_ally, temp_enemy) {
+    function Core(ud, formations, temp_ally, temp_enemy, frame) {
         this.images_to_show = ud.images_to_show;
         this.multiplied = ud.multiplied;
         this.ally = temp_ally;
@@ -24,6 +24,7 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
         this.image_graphics_width = ud.image_graphics_width;
         this.image_graphics_height = ud.image_graphics_height;
         this.changed_units = {};
+        this.frame = frame;
     }
 
     Core.prototype = new Iteration();
@@ -40,6 +41,7 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
     Core.prototype.initiate = function() {
         var ally_length = this.formations['ally'].length;
         for(var row = 0; row < ally_length; row++) {
+            var stats = this.clone(this.formations['ally'][row]['stats']);
             var ally_row_y = parseInt(this.formations['ally'][row]['y']);
             var ally_row_row = parseInt(this.formations['ally'][row]['row']) + ally_row_y;
             for(var y = ally_row_y; y < ally_row_row; y++) {
@@ -51,12 +53,15 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                 var ally_row_x = parseInt(this.formations['ally'][row]['x']);
                 var ally_row_column = -parseInt(this.formations['ally'][row]['column']) + ally_row_x;
                 for (var x = ally_row_x; x > ally_row_column; x--) {
-                    var stats = this.clone(this.formations['ally'][row]['stats']);
-                    stats.hp = stats.hp_from;
-                    stats.dmg = stats.dmg_from;
-                    stats.def_inf = stats.def_inf_from;
-                    stats.def_hors = stats.def_hors_from;
-                    stats.def_arch = stats.def_arch_from;
+                    var new_stats = {};
+                    new_stats.speed = stats.speed;
+                    new_stats.type = stats.type;
+                    new_stats.unit = stats.unit;
+                    new_stats.hp = stats.hp_from;
+                    new_stats.dmg = stats.dmg_from;
+                    new_stats.def_inf = stats.def_inf_from;
+                    new_stats.def_hors = stats.def_hors_from;
+                    new_stats.def_arch = stats.def_arch_from;
                     var army_targets = []
                     var targets_length = this.formations['ally'][row].targets.length;
                     for(var t = 0; t < targets_length; t++ ) {
@@ -67,16 +72,24 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                         this.distance_y + y - ally_row_y);
                         army_targets.push(army_target);
                     }
+                    var able_to_move = false;
+                    if(
+                        y == ally_row_y || x == ally_row_x || 
+                        y == ally_row_row-1 || 
+                        x == ally_row_column+1) {
+                        able_to_move = true;
+                    }
                     columns[x] = new Unit(
                         x,
                         y,
-                        stats,
+                        new_stats,
                         1,
                         parseInt(this.distance_x),
                         parseInt(this.distance_y),
                         this.formations['ally'][row].id,
                         this.formations['ally'][row].unit_type,
-                        army_targets
+                        army_targets,
+                        able_to_move
                     );
                 }
                 this.ally[y] = columns;
@@ -84,6 +97,7 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
         }
         var enemies_length = this.formations['enemy'].length;
         for(row = 0; row < enemies_length; row++) {
+            var stats = this.clone(this.formations['enemy'][row]['stats']);
             var enemy_row_y = parseInt(this.formations['enemy'][row]['y']);
             var enemy_row_row = parseInt(this.formations['enemy'][row]['row']) + enemy_row_y;
             for( y = enemy_row_y; y < enemy_row_row; y++) {
@@ -95,12 +109,15 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                 var enemy_row_x = parseInt(this.formations['enemy'][row]['x']);
                 var enemy_row_column = parseInt(this.formations['enemy'][row]['column']) + enemy_row_x;
                 for (x = enemy_row_x; x < enemy_row_column; x++) {
-                    stats = this.clone(this.formations['enemy'][row]['stats']);
-                    stats.hp = stats.hp_from;
-                    stats.dmg = stats.dmg_from;
-                    stats.def_inf = stats.def_inf_from;
-                    stats.def_hors = stats.def_hors_from;
-                    stats.def_arch = stats.def_arch_from;
+                    var new_stats = {};
+                    new_stats.speed = stats.speed;
+                    new_stats.type = stats.type;
+                    new_stats.unit = stats.unit;
+                    new_stats.hp = stats.hp_from;
+                    new_stats.dmg = stats.dmg_from;
+                    new_stats.def_inf = stats.def_inf_from;
+                    new_stats.def_hors = stats.def_hors_from;
+                    new_stats.def_arch = stats.def_arch_from;
                     var army_targets = []
                     var targets_length = this.formations['enemy'][row].targets.length;
                     for(var t = 0; t < targets_length; t++ ) {
@@ -111,16 +128,24 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                         this.distance_y + y - enemy_row_y);
                         army_targets.push(army_target);
                     }
+                    var able_to_move = false;
+                    if(
+                        y == enemy_row_y || x == enemy_row_x || 
+                        y == enemy_row_row-1 || 
+                        x == enemy_row_column-1) {
+                        able_to_move = true;
+                    }
                     columns[x] = new Unit(
                         x,
                         y,
-                        stats,
+                        new_stats,
                         -1,
                         parseInt(this.distance_x),
                         parseInt(this.distance_y),
                         this.formations['enemy'][row].id,
                         this.formations['enemy'][row].unit_type,
-                        army_targets
+                        army_targets,
+                        able_to_move
                     );
                 }
                 this.enemy[y] = columns;

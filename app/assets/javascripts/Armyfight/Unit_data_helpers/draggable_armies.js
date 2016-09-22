@@ -1,10 +1,12 @@
-var draggable_armies = angular.module('draggable_armies', []);
-draggable_armies.factory('draggable_armies', [function () {
+var draggable_armies = angular.module('draggable_armies', ['preloader']);
+draggable_armies.factory('draggable_armies', ['preloader', function (Preloader) {
     'use strict';
 
     function DraggableArmies() {
         this.draggable_armies = [];
     }
+
+    DraggableArmies.prototype = new Preloader();
 
     DraggableArmies.prototype.draw_army_borders = function(ctx) {
         this.draggable_armies = [];

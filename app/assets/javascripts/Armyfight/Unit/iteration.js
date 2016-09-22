@@ -24,29 +24,31 @@ iteration.factory('iteration', ['helper', function (Helper) {
                         if (unit.survived()) {
                             var changed = false;
 
-                            if (unit['target'] == undefined || 
-                                (unit['target']['stats'] && unit['target']['stats']['hp'] < 1)) {
-                                console.log(x, y, 'found target', unit['target']);
-
-                                unit['target'] = search_for_target(closest_y, self, unit);
+                            if ( unit.able_to_move && (unit['target'] == undefined || self.frame % 100 === 0) ){
+                                var target = search_for_target(closest_y, self, unit);
+                                unit['target'] = {x: target.x, y: target.y};
                                 changed = true;
                             }
 
-                            if( (parseInt(x) != unit['x']) || (parseInt(y) != unit['y']) ) {
+                            if(unit.old_move_x != unit.move_x || unit.old_move_y != unit.move_y ) {
                                 if(unit.status != 1) {
-                                    unit.status = 1;
                                     changed = true;
-                                    console.log(x, y, 'unit status is from 0 to 1');
+                                    unit.able_surroundings_to_move();
                                 }
-                                
-                                delete self[type][y][x];
-                                if(!_.has(self[type], unit['y'])) self[type][unit['y']] = {};
+                                unit.status = 1;
                             } else {
                                 if(unit.status != 0) {
-                                    unit.status = 0;
                                     changed = true;
-                                    console.log(x, y, 'unit status is from 1 to 0');
+                                } 
+                                if(unit.able_to_move && !unit.can_move_somewhere()) {
+                                    unit.able_to_move = false;
                                 }
+                                unit.status = 0;
+                            }
+
+                            if( (parseInt(x) != unit['x']) || (parseInt(y) != unit['y']) ) {
+                                delete self[type][y][x];
+                                if(!_.has(self[type], unit['y'])) self[type][unit['y']] = {};
                             }
 
                             unit.draw(
@@ -96,6 +98,7 @@ iteration.factory('iteration', ['helper', function (Helper) {
     };
 
     function search_for_target(closest_y, self, unit) {
+
         if(!unit.targets[unit.target_id]) {
             closest_y = parseInt(closest_y);
             var y = parseInt(unit.y);

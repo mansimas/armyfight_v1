@@ -72,6 +72,8 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
         this.draw_background();
 
         if(!this.editing) {
+            this.core.frame = this.frame;
+            this.register_load_data();
             this.core.draw_deaths();
             this.core.calculate_units();  
         } else { this.formation_changed(); }
@@ -161,7 +163,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 //
     UnitData.prototype.generate_core = function(formations, temp_ally, temp_enemy) {
         this.clear_canvas();
-        this.core = new Core(this, formations, temp_ally, temp_enemy);
+        this.core = new Core(this, formations, temp_ally, temp_enemy, this.frame);
         this.core.initiate();
     }
 

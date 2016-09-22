@@ -4,25 +4,25 @@ nature_canvas.factory('nature_canvas', [function () {
     'use strict';
 
     function Nature_canvas() {
-        var renderer = PIXI.autoDetectRenderer(
-            256, 256, {transparent: true}
-        );
-        var stage = new PIXI.Container();
-        renderer.render(stage);
-        renderer.view.style.position = "absolute";
-        renderer.view.style.border = "1px dashed black";
-        renderer.autoresize = true;
-        document.body.appendChild(renderer.view);
+        // var renderer = PIXI.autoDetectRenderer(
+        //     256, 256, {transparent: true}
+        // );
+        // var stage = new PIXI.Container();
+        // renderer.render(stage);
+        // renderer.view.style.position = "absolute";
+        // renderer.view.style.border = "1px dashed black";
+        // renderer.autoresize = true;
+        // document.body.appendChild(renderer.view);
 
-        var url1 = 'http://localhost:3000' + "<%= image_path('sword.png') %>";
+        // var url1 = 'http://localhost:3000' + "<%= image_path('sword.png') %>";
 
-        PIXI.loader.add(url1).load(setup);
+        // PIXI.loader.add(url1).load(setup);
 
-        function setup() {
-            var sprite = new PIXI.Sprite(PIXI.loader.resources[url1].texture);
-            stage.addChild(sprite);
-            renderer.render(stage);
-        }
+        // function setup() {
+        //     var sprite = new PIXI.Sprite(PIXI.loader.resources[url1].texture);
+        //     stage.addChild(sprite);
+        //     renderer.render(stage);
+        // }
 
         // PIXI.loader.add([url1])
         //   .load(setup);
@@ -36,25 +36,25 @@ nature_canvas.factory('nature_canvas', [function () {
         // }
 
 
-        var draw_nature_canvas  = document.getElementById("nature");
-        this.nat_ctx = draw_nature_canvas.getContext("2d");
+        // var draw_nature_canvas  = document.getElementById("nature");
+        // this.nat_ctx = draw_nature_canvas.getContext("2d");
     }
 
     Nature_canvas.prototype.enable_nature_drawing = function(boolean) {
-        this.draw_nature = boolean; 
-        this.drag_screen = false;
-        this.drag_army = false; 
-        console.log(this.draw_nature);
+        // this.draw_nature = boolean; 
+        // this.drag_screen = false;
+        // this.drag_army = false; 
+        // console.log(this.draw_nature);
     }
 
     Nature_canvas.prototype.draw_forms = function(form) {
-        if(this.draw_nature.shape == 'square') {
-            this.nat_ctx.strokeRect(10, 10, 100,100);
-        } else if (this.draw_nature.shape == 'circle') {
-            this.nat_ctx.beginPath();
-            this.nat_ctx.arc(100,75,50,0,2*Math.PI);
-            this.nat_ctx.stroke();
-        }
+        // if(this.draw_nature.shape == 'square') {
+        //     this.nat_ctx.strokeRect(10, 10, 100,100);
+        // } else if (this.draw_nature.shape == 'circle') {
+        //     this.nat_ctx.beginPath();
+        //     this.nat_ctx.arc(100,75,50,0,2*Math.PI);
+        //     this.nat_ctx.stroke();
+        // }
     }
 
     return Nature_canvas;
