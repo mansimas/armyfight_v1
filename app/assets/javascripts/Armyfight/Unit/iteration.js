@@ -22,23 +22,23 @@ iteration.factory('iteration', ['helper', function (Helper) {
                         x = parseInt(x);
                         unit.setAllyEnemy(self.ally, self.enemy);
                         if (unit.survived()) {
-                            var changed = false;
+                            unit.changed = false;
 
-                            if ( unit.able_to_move && (unit['target'] == undefined || self.frame % 100 === 0) ){
+                            if ( unit.able_to_move && (unit['target'] == undefined || self.frame % 500 === 0) ){
                                 var target = search_for_target(closest_y, self, unit);
                                 unit['target'] = {x: target.x, y: target.y};
-                                changed = true;
+                                unit.changed = true;
                             }
 
                             if(unit.old_move_x != unit.move_x || unit.old_move_y != unit.move_y ) {
                                 if(unit.status != 1) {
-                                    changed = true;
+                                    unit.changed = true;
                                     unit.able_surroundings_to_move();
                                 }
                                 unit.status = 1;
                             } else {
                                 if(unit.status != 0) {
-                                    changed = true;
+                                    unit.changed = true;
                                 } 
                                 if(unit.able_to_move && !unit.can_move_somewhere()) {
                                     unit.able_to_move = false;
@@ -48,22 +48,25 @@ iteration.factory('iteration', ['helper', function (Helper) {
 
                             if( (parseInt(x) != unit['x']) || (parseInt(y) != unit['y']) ) {
                                 delete self[type][y][x];
+                                if(_.isEmpty(self[type][y])) {
+                                    delete self[type][y];
+                                }
                                 if(!_.has(self[type], unit['y'])) self[type][unit['y']] = {};
-                            }
+                            } 
+                            numbers[type] ++;
 
                             unit.draw(
                                 self.ctx, self.unit_width, self.drag_x, self.drag_y, 
                                 self.image[unit['stats']['unit']], self.image_graphics_width, self.image_graphics_height
                             );
 
-                            if(changed == true) {
-                                if(!_.has(self.changed_units, unit['x'])) self.changed_units[unit['x']] = {};
-                                self.changed_units[unit['x']][unit['y']] = unit;
-                            }
-
                             self[type][unit['y']][unit['x']] = unit;
+                           
                         } else {
                             delete self[type][y][x];
+                            if(_.isEmpty(self[type][y])) {
+                                delete self[type][y];
+                            }
                             var random_direction = Math.floor(Math.random() * 8);
                             if(unit.stats.unit == 'sword') {
                                 self.died_units.push([{
@@ -85,17 +88,50 @@ iteration.factory('iteration', ['helper', function (Helper) {
 
         _.each(['enemy', 'ally'], function(type) {
             _.each(group[type], function (val, y) {
-                if(_.isEmpty(self[type][y])) {
-                    delete self[type][y];
-                } else {
-                    numbers[type] += Object.keys(self[type][y]).length;
-                }
+                y = parseInt(y);
+                var closest_y = self.iterate_Y(y, type);
+                _.each(val, function (unit, x) {
+                    if(unit.changed) {
+                        if(!_.has(self.changed_units, unit.y)) self.changed_units[unit.y] = {};
+                        self.changed_units[unit.y][unit.x] = jQuery.extend({}, unit);  // slows down 100 times
+                    }
+                });
             });
         });
 
         this.countAlly  = numbers['ally'];
         this.countEnemy = numbers['enemy'];
     };
+
+// {
+//     5: {
+//         19: {y: 5, x: 19},
+//         20: {y: 5, x: 20},
+//         21: {y: 5, x: 20},
+//     },
+//     44: {
+//         -50: {y: 44, x: -50},
+//         -49: {y: 44, x: -49},
+//         -48: {y: 44, x: -48},
+//     },
+// }
+
+
+// {
+//     4: {
+//         18: {y: 4, x: 18},
+//         19: {y: 4, x: 19},
+//         20: {y: 4, x: 20},
+//     },
+//     45: {
+//         -50: {y: 44, x: -50},
+//         -49: {y: 44, x: -49},
+//         -48: {y: 44, x: -48},
+//     },
+// }
+
+
+
 
     function search_for_target(closest_y, self, unit) {
 

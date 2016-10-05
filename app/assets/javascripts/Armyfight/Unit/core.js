@@ -89,7 +89,7 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                         this.formations['ally'][row].id,
                         this.formations['ally'][row].unit_type,
                         army_targets,
-                        able_to_move
+                        true
                     );
                 }
                 this.ally[y] = columns;
@@ -145,7 +145,7 @@ core.factory('core', ['units', 'iteration', function (Unit, Iteration) {
                         this.formations['enemy'][row].id,
                         this.formations['enemy'][row].unit_type,
                         army_targets,
-                        able_to_move
+                        true
                     );
                 }
                 this.enemy[y] = columns;

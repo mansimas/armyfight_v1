@@ -34,10 +34,12 @@ helper.factory('helper', ['drawings', function (Drawings) {
         if(units == 'ally') return _.find(this.enemy[y],  function (v, k) { return parseInt(k) >= x });
     };
 
-    Helper.prototype.iterate_Y = function(y, units) {
+    Helper.prototype.iterate_Y = function(y, units, test) {
+        if(test) console.log(this);
         try {
             if (units == 'ally') {
                 if (_.has(this.enemy, y)) {
+                    if(test) console.log('has 1. enemy:', this.enemy, 'y:', y, 'has?', _.has(this.enemy, y));
                     return y;
                 } else {
                     var direction = 0;

@@ -27,6 +27,7 @@ unit.factory('units', ['parent_unit', function (parent_unit) {
         this.old_move_y = 0;
         this.old_move_x = 0;
         this.able_to_move = able_to_move;
+        this.changed= false;
     }
     Unit.prototype = new parent_unit();
 
