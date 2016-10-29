@@ -175,11 +175,11 @@ initial_data.factory('initial_data', ['bg_canvas', function (BgCanvas) {
         
         return {
             'ally': [
-                {unit: 'sword', stats: this.unit_stats['sword'], column: 1, row: 1, 
+                {unit: 'sword', stats: this.unit_stats['sword'], column: 10, row: 10, 
                 x: 56, y: 135, targets: [], id: ally_id, unit_type: 'ally' }
             ],
             'enemy': [
-                {unit: 'sword', stats: this.unit_stats['sword'], column: 1, row: 1, 
+                {unit: 'sword', stats: this.unit_stats['sword'], column: 10, row: 10, 
                 x: 92, y: 134, targets: [], id: enemy_id, unit_type: 'enemy' }
             ]
         }

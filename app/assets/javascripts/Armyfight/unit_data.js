@@ -86,10 +86,10 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 
         this.ctx.canvas.width =  $(window).width() - 120;
         this.bg_ctx.canvas.width =  $(window).width() - 120;
-        this.ctx.canvas.height =  $(window).height() - $(window).height()/10;
-        this.bg_ctx.canvas.height =  $(window).height() - $(window).height()/10;
+        this.ctx.canvas.height =  $(window).height() - $(window).height()/50;
+        this.bg_ctx.canvas.height =  $(window).height() - $(window).height()/50;
         if(!_.isEmpty(this.core)) {
-            this.core.dth_ctx.canvas.height =  $(window).height() - $(window).height()/10;
+            this.core.dth_ctx.canvas.height =  $(window).height() - $(window).height()/50;
             this.core.dth_ctx.canvas.width =  $(window).width() - 120;
         }
         if(this.first_attack) this.formation_changed();
