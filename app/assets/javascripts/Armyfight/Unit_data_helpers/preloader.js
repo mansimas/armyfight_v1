@@ -20,28 +20,32 @@ preloader.factory('preloader', [function () {
         // ];
 
     
-        // if(this.frame == 1) {
-        //     console.log(this.compress_array(units));
-        // }
+        if(this.frame == 1) {
+            console.log("this.core.changed_units", this.core.changed_units);
+        }
 
         // console.log('uncompressed', this.core.changed_units);
-        this.armies_encoding(this.core.changed_units);
-        this.core.changed_units = {};
+        // this.armies_encoding(this.core.changed_units);
+        // this.core.changed_units = {};
     }
 
     Preloader.prototype.armies_encoding = function(units) {
         var compressed_units = this.first_compression_level(units);
+       
         for(var x = 0; x < compressed_units['armies_array'].length; x++) {
-            var compressed = compress_array(compressed_units['armies_array'][x]);
+            console.log('Next army')
+             console.log(JSON.stringify(compressed_units['armies_array'][x]));
+
+        //     var compressed = compress_array(compressed_units['armies_array'][x]);
         
-            // if(compressed.length > 1) {
-            //     this.compressed_lengthx++;
-            // }
-            // this.preloader_count += compressed.length;
-            // if(this.preloader_count % 1000 === 0) {
-            //     console.log(this.preloader_count, this.compressed_lengthx);
+        //     // if(compressed.length > 1) {
+        //     //     this.compressed_lengthx++;
+        //     // }
+        //     // this.preloader_count += compressed.length;
+        //     // if(this.preloader_count % 1000 === 0) {
+        //     //     console.log(this.preloader_count, this.compressed_lengthx);
                
-            // }
+        //     // }
         }
         
         // var units_arr = this.second_compression_level(compressed_units['armies_array']);
@@ -128,16 +132,16 @@ preloader.factory('preloader', [function () {
                         self.tester = ['val', val, 'y', y, 'unit', u, 'x', x];
                     }
                     var indx2 = armies_array[indx1].push([]) - 1; //  new arr of x
-                    armies_array[indx1][indx2].push([u.x, u.y]); 
+                    armies_array[indx1][indx2].push([u.x, u.y, u.target.x, u.target.y]); 
                 } else {
                     var indx = self.contains_arrays(unit_local_stats, local_stats, 'index'); // susirandu kuri armija
                     var x_index = self.exist_x_row(armies_array[indx], u.x);
                     // console.log('x_index', x_index, 'armies_array[indx], u.x', armies_array[indx], u.x);
                     if(x_index === false) {
                         var x_index = armies_array[indx].push([]) - 1 ;
-                        armies_array[indx][x_index].push([u.x, u.y]);
+                        armies_array[indx][x_index].push([u.x, u.y, u.target.x, u.target.y]);
                     } else {
-                        armies_array[indx][x_index].push([u.x, u.y]);
+                        armies_array[indx][x_index].push([u.x, u.y, u.target.x, u.target.y]);
                     }
                 }
             });

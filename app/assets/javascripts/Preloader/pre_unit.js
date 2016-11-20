@@ -1,3 +1,5 @@
+
+
 //  require underscore 
     var unit_stats = {
         sword: {
@@ -13,11 +15,11 @@
 
     var formations = {
         'ally': [
-            {stats: unit_stats['sword'], column: 2, row: 2, 
-            x: 56, y: 135, unit_type: 'ally' }
+            {stats: unit_stats['sword'], column: 10, row: 10, 
+            x: 50, y: 135, unit_type: 'ally' }
         ],
         'enemy': [
-            {stats: unit_stats['sword'], column: 2, row: 2, 
+            {stats: unit_stats['sword'], column: 10, row: 10, 
             x: 92, y: 134, unit_type: 'enemy' }
         ]
     };
@@ -32,6 +34,27 @@
     var target = {};
     var closest_y = 0;
     var string_y = 0;
+
+
+    function start() {
+        var start = new Date().getTime();
+        // console.log('before initiatemmmmmm', start );
+
+        initiate();
+
+        for(var a = 0; a < 10; a++) {
+            calculate_units();
+            armies_encoding(group.ally);
+            armies_encoding(group.enemy);
+            frame++;
+            // if(frame % 50 === 0) console.log(frame);
+        }
+        var end = new Date().getTime();
+        // console.log('before initiate', end );
+        // console.log('time', end - start );
+        // console.log(group)
+
+    }
 
     function initiate() {
         var army_id = 0;
@@ -144,26 +167,8 @@
 
 
 
-    function start() {
-        initiate();
+ 
 
-        console.log(
-            'ally', group.ally,
-            'enemy', group.enemy,
-            'frame', frame,
-            'distance_x', distance_x,
-            'distance_y', distance_y,
-            'unit', unit,
-            'army', army
-        );  
-        for(var a = 0; a < 10; a++) {
-            calculate_units();
-            console.log('llllllllllllllllllllllllllll');
-        }
-
-    }
-
-    start();
 
  
     function calculate_units() {
@@ -222,8 +227,6 @@
                             delete group[type][y];
                         }
                     }
-
-                    console.log(unit);
                 });
             });
         });
@@ -362,8 +365,8 @@
             if (unit.attacking == 0) {
                 try_moving();
             } else {
-                var attacking = group[army[unit.attacking.id].unit_type][unit.attacking.y][unit.attacking.x];
-                if(attacking.hp > 0) {
+                if(unit.attacking.hp > 0) {
+                    var attacking = group[army[unit.attacking.id].unit_type][unit.attacking.y][unit.attacking.x];
                     if(unit.team == 1) {
                         attacking.hp -= stats.dmg;
                     } else {
@@ -428,7 +431,7 @@
         } else if(unit.direction_x == -1 && unit.move_x > 1) {
             if(unit.attacking != 0 && unit.attacking['move_x'] < unit.move_x - 1) {
                 unit.move_x -= stats.speed;
-            } else if (attacking == 0 && move_x > 1) {
+            } else if (unit.attacking == 0 && unit.move_x > 1) {
                 unit.move_x -= stats.speed;
             }
         }
@@ -608,7 +611,7 @@
     };
 
     function setAllyEnemy() {
-        if(unit.team == 1) {
+        if(army[unit.id].team == 1) {
             unit.ally = 'ally';
             unit.enemy = 'enemy';
         } else {
@@ -616,3 +619,200 @@
             unit.enemy = 'ally';
         }
     };
+
+
+// preloader
+
+
+    function contains_arrays(arr1, arr2, attrs) {
+        for(var x = 0; x < arr1.length; x++) {
+            var temp = arr1[x];
+            var same_elements = 0;
+            for(var y=0; y<arr1[x].length; y++) {
+                if(arr1[x][y] == arr2[y]) {
+                    same_elements++;
+                }
+            }
+            if(same_elements == arr1[x].length) {
+                if(attrs == 'index') {
+                    return x;
+                } else {
+                    return true;
+                }
+            }
+        }
+        if(attrs == 'index') {
+            return -1;
+        } else {
+            return false;
+        }
+    }
+
+
+    function exist_x_row(army, last_x) {
+        for(var x = 0; x < army.length; x++) {
+            if(army[x][0][0] == last_x) {
+                return x;
+            }
+        }
+        return false;
+    }
+
+    function first_compression_level(units) {
+        var unit_local_stats = [];
+        var armies_array = [];
+        _.each(units, function (val, y) {
+            _.each(val, function (u, x) {
+
+                var local_stats = [u.attacking, u.direction_x, u.direction_y, u.facedirection,
+                    u.frame, u.killed, u.move_x, u.move_y, u.status, u.stopped, u.hp ];
+                if(u.target) {
+                  var targ = u.target;
+                } else {
+                  var targ = {x: 0, y: 0};
+                }
+
+                if(!contains_arrays(unit_local_stats, local_stats)) {
+                    var loc = unit_local_stats.push(local_stats) - 1;
+                    var indx1 = armies_array.push([]) - 1;
+                    var indx2 = armies_array[indx1].push([]) - 1;
+                    armies_array[indx1][indx2].push([u.x, u.y, u.id, loc, targ.x, targ.y]); 
+                } else {
+                    var indx = contains_arrays(unit_local_stats, local_stats, 'index');
+                    var x_index = exist_x_row(armies_array[indx], u.x);
+                    if(x_index === false) {
+                        var x_index = armies_array[indx].push([]) - 1 ;
+                        armies_array[indx][x_index].push([u.x, u.y, u.id, indx, targ.x, targ.y]);
+                    } else {
+                        armies_array[indx][x_index].push([u.x, u.y, u.id, indx, targ.x, targ.y]);
+                    }
+                }
+            });
+        });
+
+        return {
+            local_stats: unit_local_stats,
+            armies_array: armies_array
+        }
+    };
+
+    function armies_encoding(units) {
+
+        var compressed = [];
+        var compressed_units = first_compression_level(units);
+       
+        for(var x = 0; x < compressed_units['armies_array'].length; x++) {
+            var reconstructed = reconstruct_army(compressed_units['armies_array'][x]);
+            var splitted = calculate_groups(reconstructed);
+            // console.log('splitted', JSON.stringify(splitted));
+            var analyzed = analyze_armies(splitted);
+            console.log(JSON.stringify(analyzed));
+            // compressed.push(compress_array(compressed_units['armies_array'][x]));
+        }
+        // console.log(compressed_units)
+
+        return compressed;
+    }
+
+    function analyze_armies(both) {
+      var splitted = both[0];
+      var targetters = both[1];
+
+      var collected = [];
+      for (var key in splitted){
+        var val = splitted[key];
+        //[x, x], [y, y]
+        var first_x = val[1][1][0];
+        var first_y = val[1][0];
+        var height = val[0];
+        var width = val[1][1][1] - val[1][0] + 1;
+        var xxyy = [ first_x, height, first_y, width ];
+
+        var stats = [val[1][1][2], val[1][1][3]];
+
+        var targets = targetters[key];
+
+        var answer = [xxyy, stats, targets];
+
+        collected.push(answer);
+      }
+      return collected;
+    }
+
+    function reconstruct_army(armys) {
+      for (var x in armys){
+        var row = armys[x];
+        for(var y in row) 
+          row[y] = [-1, row[y]];
+      }
+      return armys;
+    }
+
+    // incoming explanation:
+    // armys = [[[num, [unit stats]]]]
+    // armys = [[[num, [unit.x, unit.y, unit.id, unit.locals, unit.target.x, unit.target.y]]]]
+    // real example:
+    // armys = [[[-1,[49,135,1,0,92,135]],[-1,[49,136,1,0,92,134]]],[[-1,[50,135,1,0,92,135]],[-1,[50,136,1,0,92,134]]]]
+    // return example:
+    // armies_arr = {num: [height, [[unit.x, unit.y, ]]]}
+    // armies_arr = {"0":[1,[135,[49,136,1,0,92,134]]]}
+    function calculate_groups(armys) {
+      var num = -1;
+      var armies_arr = {};
+      var targets_arr = {};
+      var collected = {};
+      var findyy = function(row, y){
+        while (row.hasOwnProperty(y) && row[y][0] == -1) {
+            if(targets_arr.hasOwnProperty(num)) {
+              targets_arr[num].push([row[y][1][4], row[y][1][5]]);
+            } else {
+              targets_arr[num] = [];
+              targets_arr[num].push([row[y][1][4], row[y][1][5]]);
+            }
+            y++;
+        } 
+        return y;
+      }
+      var asgnyy = function(row, y, yy){ 
+        var arr_1 = undefined;
+        var arr_2 = undefined;
+        for (var i = y; i < yy; ++i) {
+            row[i][0] = num;
+            if(i == y) {
+                arr_1 = row[i][1][1];
+            }
+            if(i == yy-1 || yy == y) {
+                arr_2 = row[i][1];
+            }
+        } 
+        return [arr_1, arr_2];
+      }
+      var assign = function(row, x, y){
+
+        num++;
+        var yy = findyy(row,y);
+        do {
+          var army_rows = asgnyy(row,y,yy);
+          if(armies_arr.hasOwnProperty(num)) {
+            armies_arr[num] = [armies_arr[num][0] + 1, army_rows];
+          } else {
+            armies_arr[num] = [1, army_rows];
+          }
+          x++;
+          if (!armys.hasOwnProperty(x)) return;
+          row = armys[x];
+          var yx = findyy(row,y);
+          if (yx < yy) return;
+        } while (true);
+      }
+      for (var x in armys) {
+        var row = armys[x];
+        for(var y in row) {
+          if (row[y][0] == -1)
+            assign(row,x,y, armys[x]);
+        }
+      }
+      return [armies_arr, targets_arr];
+    }
+
+    start();

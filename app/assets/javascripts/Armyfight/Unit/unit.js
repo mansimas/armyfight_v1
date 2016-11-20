@@ -291,6 +291,7 @@ parent_unit.factory('parent_unit', function () {
                     var new_x = this.x + this.direction_x;
                     if(this.enemy[new_y]) {
                         if(this.enemy[new_y][new_x]) {
+                            console.log('aaaaa1', self.frame);
                             this.attacking = this.enemy[new_y][new_x];
                             this.target = this.enemy[new_y][new_x];
                             this.stopped = true;
@@ -301,6 +302,7 @@ parent_unit.factory('parent_unit', function () {
             } else {
                 var new_y = this.y + this.direction_y;
                 if(this.enemy[new_y] && this.enemy[new_y][this.x]) {
+                    console.log('aaaaa2', self.frame);
                     this.attacking = this.enemy[new_y][this.x];
                     this.target = {x: this.x, y: new_y};
                     this.stopped = true;
@@ -312,6 +314,7 @@ parent_unit.factory('parent_unit', function () {
             var new_x = this.x + this.direction_x;
             if(this.enemy[new_y]) {
                 if(this.enemy[new_y][new_x]) {
+                    console.log('aaaaa3', self.frame);
                     this.attacking = this.enemy[new_y][new_x];
                     this.target = {x: new_x, y: new_y};
                     this.stopped = true;

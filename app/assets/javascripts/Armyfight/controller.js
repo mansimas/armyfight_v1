@@ -273,6 +273,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.animate = function() {
             ud.animate();
             ud.frame ++;
+            console.log(ud.frame);
             $scope.countAlly = ud.core.getCountAlly();
             $scope.countEnemy = ud.core.getCountEnemy();
         }
