@@ -4,57 +4,39 @@ nature_canvas.factory('nature_canvas', [function () {
     'use strict';
 
     function Nature_canvas() {
-        var renderer = PIXI.autoDetectRenderer(
-            256, 256, {transparent: true}
-        );
-        var stage = new PIXI.Container();
-        renderer.render(stage);
-        renderer.view.style.position = "absolute";
-        renderer.view.style.border = "1px dashed black";
-        renderer.autoresize = true;
-        document.body.appendChild(renderer.view);
-
-        var url1 = 'http://localhost:3000' + "<%= image_path('sword.png') %>";
-
-        PIXI.loader.add(url1).load(setup);
-
-        function setup() {
-            var sprite = new PIXI.Sprite(PIXI.loader.resources[url1].texture);
-            stage.addChild(sprite);
-            renderer.render(stage);
-        }
-
-        // PIXI.loader.add([url1])
-        //   .load(setup);
-
-        // function setup() {
-        //   var cat = new PIXI.Sprite(
-        //     PIXI.loader.resources[url1].texture
-        //   );
-        //   stage.addChild(cat);
-        //   renderer.render(stage);
-        // }
-
-
         var draw_nature_canvas  = document.getElementById("nature");
         this.nat_ctx = draw_nature_canvas.getContext("2d");
+        this.nature_coordinates = {};
     }
 
-    Nature_canvas.prototype.enable_nature_drawing = function(boolean) {
-        this.draw_nature = boolean; 
+    Nature_canvas.prototype.enable_nature_drawing = function() {
+        this.draw_nature = !this.draw_nature;
         this.drag_screen = false;
-        this.drag_army = false; 
-        console.log(this.draw_nature);
+        this.drag_army = false;
     }
 
-    Nature_canvas.prototype.draw_forms = function(form) {
-        if(this.draw_nature.shape == 'square') {
-            this.nat_ctx.strokeRect(10, 10, 100,100);
-        } else if (this.draw_nature.shape == 'circle') {
-            this.nat_ctx.beginPath();
-            this.nat_ctx.arc(100,75,50,0,2*Math.PI);
-            this.nat_ctx.stroke();
-        }
+    Nature_canvas.prototype.register_forms = function(x, y) {
+      if(!this.nature_coordinates[this.nature_color]) {
+        this.nature_coordinates[this.nature_color] = [];
+      }
+      this.nature_coordinates[this.nature_color].push([this.drag_x+x, this.drag_y+y, this.map_range])
+    }
+
+    Nature_canvas.prototype.draw_forms = function() {
+        this.clear_nature_ctx();
+        var self = this;
+        _.each(self.nature_coordinates, function(val, index) {
+            self.nat_ctx.fillStyle = '#' + index;
+            for(var item = 0, len=val.length; item < len; item++) {
+              var coord = val[item];
+              self.nat_ctx.fillRect(coord[0] - self.drag_x-coord[2]/2, coord[1]-self.drag_y-coord[2]/2, coord[2], coord[2]);
+            }
+            self.nat_ctx.fill();
+        });
+    }
+
+    Nature_canvas.prototype.clear_nature_ctx = function() {
+        this.nat_ctx.clearRect(0, 0, this.nat_ctx.canvas.width, this.nat_ctx.canvas.height);
     }
 
     return Nature_canvas;

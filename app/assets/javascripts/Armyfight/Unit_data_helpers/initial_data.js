@@ -30,6 +30,10 @@ initial_data.factory('initial_data', ['bg_canvas', function (BgCanvas) {
         this.army_drag_x_first = 0;
         this.army_drag_y_first = 0;
         this.formations = {};
+        this.draw_nature = false;
+        this.continued_drawing_nature = false;
+        this.nature_color = '000000';
+        this.map_range = 10;
         this.unit_for_stats_change = {};
         this.last_id = {'ally': 0, 'enemy': 0};
         this.image = {
@@ -171,14 +175,14 @@ initial_data.factory('initial_data', ['bg_canvas', function (BgCanvas) {
         } else if(type == 'enemy') {
             this.last_id['enemy'] ++;
         }
-        
+
         return {
             'ally': [
-                {unit: 'sword', stats: this.unit_stats['sword'], column: 20, row: 20, 
+                {unit: 'sword', stats: this.unit_stats['sword'], column: 20, row: 20,
                 x: 56, y: 135, targets: [], id: ally_id, unit_type: 'ally' }
             ],
             'enemy': [
-                {unit: 'sword', stats: this.unit_stats['sword'], column: 20, row: 20, 
+                {unit: 'sword', stats: this.unit_stats['sword'], column: 20, row: 20,
                 x: 92, y: 134, targets: [], id: enemy_id, unit_type: 'enemy' }
             ]
         }

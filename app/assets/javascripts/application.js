@@ -3,5 +3,6 @@
 //= require jquery.turbolinks
 //= require Libraries/underscore.min.js
 //= require Libraries/angular.min.js
+//= require Libraries/jscolor.min.js
 //= require ckeditor/init
 //= require_tree .

@@ -17,18 +17,19 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.formations = ud.get_formations('both');
         $scope.images_to_show = 2;
         $scope.army_view = 3;
+        $scope.drawing_enabled = true;
 
     //
     // Mouse events
     //
-        ud.canvas.addEventListener('mousedown', function(evt) { 
-            prepare_selected_army(ud.mouse_down(evt)); 
+        ud.canvas.addEventListener('mousedown', function(evt) {
+            prepare_selected_army(ud.mouse_down(evt));
         }, false);
 
-        ud.canvas.addEventListener('mouseup', function(evt) { 
-            ud.mouse_up(evt); 
-            if(ud.set_target && !_.isEmpty($scope.unit_for_stats_change) && ud.set_target_cursor(evt)) { 
-                $scope.add_target_to_army(ud.getMousePos(ud.canvas, evt)); 
+        ud.canvas.addEventListener('mouseup', function(evt) {
+            ud.mouse_up(evt);
+            if(ud.set_target && !_.isEmpty($scope.unit_for_stats_change) && ud.set_target_cursor(evt)) {
+                $scope.add_target_to_army(ud.getMousePos(ud.canvas, evt));
             }
         }, false);
 
@@ -77,16 +78,25 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.center_army = function() { ud.center_army($scope.unit_for_stats_change); }
         $scope.edit_army_view = function(number) { return number == $scope.army_view; }
         $scope.remove_target = function(key) { $scope.unit_for_stats_change.targets.splice(key, 1); }
+        $scope.set_map_range = function() {
+          ud.map_range = document.getElementsByName("map_range")[0].value;
+          console.log(ud.map_range);
+        }
+        $scope.draw_map = function(key) {
+          ud.enable_nature_drawing();
+          $scope.drawing_enabled = !$scope.drawing_enabled;
+        }
+        $scope.set_color = function() { ud.nature_color = document.getElementsByName("jscolorvalue")[0].value; }
 
-        $scope.enable_targeting = function() { 
-            ud.set_target = !ud.set_target; 
+        $scope.enable_targeting = function() {
+            ud.set_target = !ud.set_target;
             if(ud.set_target == false) { animate(); }
         }
 
         $scope.add_target_to_army = function(mouse_pos) {
-            ud.set_target = false; 
-            $scope.unit_for_stats_change.targets.push({ 
-                x: mouse_pos.x + ud.drag_x, 
+            ud.set_target = false;
+            $scope.unit_for_stats_change.targets.push({
+                x: mouse_pos.x + ud.drag_x,
                 y: mouse_pos.y + ud.drag_y,
                 time: 500 });
             animate();
@@ -197,7 +207,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
                 else {
                     ajax.delete_all_armies($scope.fight_id);
                     ajax.edit_fight($scope.fight_id, $scope.fight_name);
-                    
+
                     ajax.flush_armies_to_db($scope.formations, $scope.fight_id);
                 }
                 $scope.saved = true;

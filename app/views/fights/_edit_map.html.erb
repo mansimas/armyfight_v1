@@ -1,47 +1,24 @@
+
 <div data-ng-show="edit_army_view(4)" style='padding: 15px;'>
 
-    <div class="row" style='padding-top:10px;'>
-        <div class="col-md-3">
-            <label><%= r('homepage.fights.x') %></label>
-        </div>
-        <div class="col-md-3">
-            <label><%= r('homepage.fights.y') %></label>
-        </div>
-        <div class="col-md-3">
-            <label><%= r('homepage.fights.time') %></label>
-        </div>
-    </div>
 
-    <div data-ng-repeat="(key, value) in unit_for_stats_change.targets">
-        <div class="form-group row">
-            <div class="col-md-3">
-                <input type="text" data-ng-model="value.x" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <input type="text" data-ng-model="value.y" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <input type="text" data-ng-model="value.time" class="form-control">
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-danger" data-ng-click="remove_target(key)"><%= r('homepage.fights.remove') %></button>
-            </div>
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-md-12">
+        <button data-ng-show='drawing_enabled' class="btn btn-default" data-ng-click='draw_map()'><%= r('homepage.fights.draw_square') %></button>
+        <button data-ng-show='!drawing_enabled' class="btn btn-success" data-ng-click='draw_map()'><%= r('homepage.fights.now_drawing') %></button>
         </div>
     </div>
 
     <div class="row" style='padding-top:10px;'>
         <div class="col-md-12">
-        <button class="btn btn-success" data-ng-click='deselect_army()'><%= r('homepage.fights.deselect_this_army') %></button> 
-        <button class="btn btn-success" data-ng-click='center_army()'><%= r('homepage.fights.center_this_army') %></button>
+            Color: <input class="jscolor" name='jscolorvalue' value="000000" onchange='angular.element(this).scope().set_color();'>
         </div>
-    </div>
-
-    <div class="row" style='padding-top:10px;'>
-        <div class="col-md-12">
-            <button class="btn btn-success" data-ng-click='enable_targeting()'><%= r('homepage.fights.add_target_point') %></button>
+        <div class="col-md-6">
+            Range: <input type="range" name='map_range' min='1' max='100' step='1' value='10' onchange='angular.element(this).scope().set_map_range();'>
         </div>
     </div>
 
     <br>
+
 
 </div>

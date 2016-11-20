@@ -1,5 +1,5 @@
-var targets_cursor = angular.module('targets_cursor', []);
-targets_cursor.factory('targets_cursor', [function() {
+var targets_cursor = angular.module('targets_cursor', ['nature_canvas']);
+targets_cursor.factory('targets_cursor', ['nature_canvas', function(NatureCanvas) {
     'use strict';
 
     function TargetsCursor() {
@@ -8,20 +8,22 @@ targets_cursor.factory('targets_cursor', [function() {
     	this.last_cursor_pos = {x: 0, y: 0};
     }
 
+    TargetsCursor.prototype = new NatureCanvas();
+
     TargetsCursor.prototype.set_cursor_pos = function(evt) {
         var mousePos = this.getMousePos(this.canvas, evt);
         this.cursor_position = {x: mousePos.x, y: mousePos.y};
     }
 
     TargetsCursor.prototype.set_last_cursor_pos = function(evt) {
-    	this.set_cursor_pos(evt);
+    	  this.set_cursor_pos(evt);
         var mousePos = this.getMousePos(this.canvas, evt);
         this.last_cursor_pos = {x: mousePos.x, y: mousePos.y};
     }
 
     TargetsCursor.prototype.set_target_cursor = function(evt) {
         var mousePos = this.getMousePos(this.canvas, evt);
-        return (this.last_cursor_pos.x == mousePos.x && this.last_cursor_pos.y == mousePos.y); 
+        return (this.last_cursor_pos.x == mousePos.x && this.last_cursor_pos.y == mousePos.y);
     }
 
     TargetsCursor.prototype.draw_targets = function() {
@@ -33,11 +35,11 @@ targets_cursor.factory('targets_cursor', [function() {
                 var army_targets_length = army.targets.length;
                 for(var t = 0; t < army_targets_length; t++) {
                     if(t == 0) {
-                        if( type == 'ally') { 
-                            var xx = (army.x * self.distance_x) - self.drag_x - army.column 
+                        if( type == 'ally') {
+                            var xx = (army.x * self.distance_x) - self.drag_x - army.column
                             * self.distance_x + self.unit_width + army.column * self.distance_x / 2;
-                        } else {                
-                            xx = (army.x * self.distance_x) - self.drag_x + army.column * self.distance_x / 2; 
+                        } else {
+                            xx = (army.x * self.distance_x) - self.drag_x + army.column * self.distance_x / 2;
                         }
 
                         var yy = (army.y * self.distance_y) - self.drag_y + army.row * self.distance_y / 2;

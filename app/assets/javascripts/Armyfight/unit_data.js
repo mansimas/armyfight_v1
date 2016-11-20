@@ -11,6 +11,11 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 //
     UnitData.prototype.mouse_down = function(evt) {
         var mousePos = this.getMousePos(this.canvas, evt);
+        if(this.draw_nature) {
+          this.continued_drawing_nature = true;
+          this.register_forms(mousePos.x, mousePos.y);
+          this.draw_forms();
+        }
         if(this.editing) {
             this.army_drag_x_first = evt.pageX;
             this.army_drag_y_first = evt.pageY;
@@ -34,11 +39,18 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
     }
 
     UnitData.prototype.mouse_up = function(evt) {
+        this.continued_drawing_nature = false;
         this.drag_screen = false;
         this.drag_army = false;
     }
 
     UnitData.prototype.mouse_move = function(evt) {
+        if(this.continued_drawing_nature) {
+          var mousePos = this.getMousePos(this.canvas, evt);
+          this.drag_screen = false;
+          this.register_forms(mousePos.x, mousePos.y);
+          this.draw_forms();
+        }
         if(this.editing) { this.formation_changed(); }
         if(this.set_target) { this.set_cursor_pos(evt); }
         if(this.drag_screen) {
@@ -70,18 +82,20 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
         this.draw_background();
         if(!this.editing) {
             this.core.draw_deaths();
-            this.core.calculate_units();  
+            this.core.calculate_units();
         } else { this.formation_changed(); }
     }
 
 //
 // Canvas resize functions
-//    
+//
     UnitData.prototype.edit_window_size = function() {
         this.ctx.canvas.width =  $(window).width() - 120;
         this.bg_ctx.canvas.width =  $(window).width() - 120;
         this.ctx.canvas.height =  $(window).height() - $(window).height()/10;
         this.bg_ctx.canvas.height =  $(window).height() - $(window).height()/10;
+        this.nat_ctx.canvas.width =  $(window).width()  - 120;
+        this.nat_ctx.canvas.height =  $(window).height() - $(window).height()/10;
         if(!_.isEmpty(this.core)) {
             this.core.dth_ctx.canvas.height =  $(window).height() - $(window).height()/10;
             this.core.dth_ctx.canvas.width =  $(window).width() - 120;
@@ -113,6 +127,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
 //
     UnitData.prototype.formation_changed = function() {
         this.draw_background();
+        this.draw_forms();
         this.generate_core(this.formations, this.core.selected_army, {}, {});
         this.core.calculate_units();
         this.core.draw_army_borders(this.ctx);

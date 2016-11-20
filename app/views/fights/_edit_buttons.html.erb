@@ -4,10 +4,12 @@
     <button class="btn btn-primary armywatch" data-ng-click='army_view = 3'><%= r('homepage.fights.armies_page') %></button>
     <button class="btn btn-primary armywatch" data-ng-click='army_view = 1'><%= r('homepage.fights.stats_page') %></button>
     <button class="btn btn-primary armywatch" data-ng-click='army_view = 2'><%= r('homepage.fights.targets_page') %></button>
+    <button class="btn btn-primary armywatch" data-ng-click='army_view = 4'><%= r('homepage.fights.maps_page') %></button>
     <br><br>
     <button class='btn btn-success armywatch' data-ng-click="army_view = 0" data-ng-show="edit_army_view(1)"><%= r('homepage.fights.hide_army_stats') %></button>
 	<button class='btn btn-success armywatch' data-ng-click="army_view = 0" data-ng-show="edit_army_view(2)"><%= r('homepage.fights.hide_army_stats') %></button>
 	<button class='btn btn-success armywatch' data-ng-click="army_view = 0" data-ng-show="edit_army_view(3)"><%= r('homepage.fights.hide_army_stats') %></button>
+	<button class='btn btn-success armywatch' data-ng-click="army_view = 0" data-ng-show="edit_army_view(4)"><%= r('homepage.fights.hide_army_stats') %></button>
 	<button class='btn btn-success armywatch' data-ng-click="army_view = 1" data-ng-show="edit_army_view(0)"><%= r('homepage.fights.show_army_stats') %></button>
 
 	<button class='btn btn-primary armywatch' data-ng-show=!saved data-ng-click="save_fight()"><%= r('homepage.fights.save') %></button>
