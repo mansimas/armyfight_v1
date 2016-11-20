@@ -78,6 +78,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.center_army = function() { ud.center_army($scope.unit_for_stats_change); }
         $scope.edit_army_view = function(number) { return number == $scope.army_view; }
         $scope.remove_target = function(key) { $scope.unit_for_stats_change.targets.splice(key, 1); }
+        $scope.draw_shape = function(shape) { ud.drawing_shape = shape; }
         $scope.set_map_range = function() {
           ud.map_range = document.getElementsByName("map_range")[0].value;
           console.log(ud.map_range);

@@ -1,24 +1,58 @@
 
 <div data-ng-show="edit_army_view(4)" style='padding: 15px;'>
 
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class="row" style='padding-top:10px;'>
+          <div class="col-md-12">
+          <button style='width:100%' data-ng-show='drawing_enabled' class="btn btn-default" data-ng-click='draw_map()'><%= r('homepage.fights.enable_drawing') %></button>
+          <button style='width:100%' data-ng-show='!drawing_enabled' class="btn btn-success" data-ng-click='draw_map()'><%= r('homepage.fights.disable_drawing') %></button>
+          </div>
+      </div>
 
-    <div class="row" style='padding-top:10px;'>
-        <div class="col-md-12">
-        <button data-ng-show='drawing_enabled' class="btn btn-default" data-ng-click='draw_map()'><%= r('homepage.fights.draw_square') %></button>
-        <button data-ng-show='!drawing_enabled' class="btn btn-success" data-ng-click='draw_map()'><%= r('homepage.fights.now_drawing') %></button>
-        </div>
+      <div class="row" style='padding-top:10px;'>
+          <div class="col-md-12">
+              Color: <input class="jscolor" name='jscolorvalue' value="000000" onchange='angular.element(this).scope().set_color();'>
+          </div>
+      </div>
+      <div class="row" style='padding-top:10px;'>
+          <div class="col-md-12">
+              Range: <input type="range" name='map_range' min='1' max='100' step='1' value='10' onchange='angular.element(this).scope().set_map_range();'>
+          </div>
+      </div>
+      <div class="row" style='padding-top:10px;'>
+          <div class='col-md-6'>
+              <button style='width:100%'  data-ng-click="draw_shape('square')" class="btn btn-default">
+                <%= r('homepage.fights.square') %>
+              </button>
+          </div>
+          <div class='col-md-6'>
+              <button style='width:100%'  data-ng-click="draw_shape('circle')" class="btn btn-default">
+                <%= r('homepage.fights.circle') %>
+              </button>
+          </div>
+      </div>
+      <div class="row" style='padding-top:50px;'>
+          <div class="col-md-12">
+            Upload your image:
+            <%= form_for(Image.new, html: { multipart: true, class: "dropzone", id: "dropzone"}) do |f| %>
+                <div class="fallback">
+                    <%= f.file_field :image %>
+                </div>
+            <% end %>
+          </div>
+      </div>
     </div>
+    <div class='col-md-6'>
+      Select any from available images:
 
-    <div class="row" style='padding-top:10px;'>
-        <div class="col-md-12">
-            Color: <input class="jscolor" name='jscolorvalue' value="000000" onchange='angular.element(this).scope().set_color();'>
+      <div class='thumb'>
+        <div id='items_grid'>
+          <%= render 'fights/images_list' %>
         </div>
-        <div class="col-md-6">
-            Range: <input type="range" name='map_range' min='1' max='100' step='1' value='10' onchange='angular.element(this).scope().set_map_range();'>
-        </div>
+      </div>
     </div>
-
-    <br>
+  </div>
 
 
 </div>

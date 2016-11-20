@@ -17,21 +17,36 @@ nature_canvas.factory('nature_canvas', [function () {
 
     Nature_canvas.prototype.register_forms = function(x, y) {
       if(!this.nature_coordinates[this.nature_color]) {
-        this.nature_coordinates[this.nature_color] = [];
+        this.nature_coordinates[this.nature_color] = {};
       }
-      this.nature_coordinates[this.nature_color].push([this.drag_x+x, this.drag_y+y, this.map_range])
+      if(!this.nature_coordinates[this.nature_color][this.drawing_shape]) {
+        this.nature_coordinates[this.nature_color][this.drawing_shape] = [];
+      }
+      this.nature_coordinates[this.nature_color][this.drawing_shape].push([this.drag_x+x, this.drag_y+y, this.map_range])
     }
 
     Nature_canvas.prototype.draw_forms = function() {
         this.clear_nature_ctx();
         var self = this;
-        _.each(self.nature_coordinates, function(val, index) {
-            self.nat_ctx.fillStyle = '#' + index;
-            for(var item = 0, len=val.length; item < len; item++) {
-              var coord = val[item];
-              self.nat_ctx.fillRect(coord[0] - self.drag_x-coord[2]/2, coord[1]-self.drag_y-coord[2]/2, coord[2], coord[2]);
-            }
-            self.nat_ctx.fill();
+        _.each(self.nature_coordinates, function(shapes_list, color) {
+            self.nat_ctx.fillStyle = '#' + color;
+            _.each(shapes_list, function(x_y_array, shape) {
+              if(shape == 'square') {
+                for(var item = 0, len = x_y_array.length; item < len; item++) {
+                  var coord = x_y_array[item];
+                  self.nat_ctx.fillRect(coord[0] - self.drag_x-coord[2]/2, coord[1]-self.drag_y-coord[2]/2, coord[2], coord[2]);
+                }
+              } else if(shape == 'circle') {
+                for(var item = 0, len = x_y_array.length; item < len; item++) {
+                  self.nat_ctx.beginPath();
+
+                  var coord = x_y_array[item];
+                  self.nat_ctx.arc(coord[0] - self.drag_x-coord[2]/2, coord[1]-self.drag_y-coord[2]/2, coord[2], 0, 2*Math.PI);
+                  self.nat_ctx.fill();
+
+                }
+              }
+            });
         });
     }
 

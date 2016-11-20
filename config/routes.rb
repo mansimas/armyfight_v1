@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  
+
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, :controllers => { registrations: 'registrations' }
-
+  resources :images
   scope ":locale", locale: /#{I18n.config.available_locales.join("|")}/ do
 
     resources :armies
@@ -36,5 +36,5 @@ Rails.application.routes.draw do
   end
   get '*path', to: redirect("/#{(I18n.locale)}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.locale}/" }
   match '', to: redirect("/#{(I18n.locale)}"), via: [:get, :post, :put, :delete]
-  
+
 end

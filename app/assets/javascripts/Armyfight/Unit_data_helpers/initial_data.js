@@ -34,6 +34,7 @@ initial_data.factory('initial_data', ['bg_canvas', function (BgCanvas) {
         this.continued_drawing_nature = false;
         this.nature_color = '000000';
         this.map_range = 10;
+        this.drawing_shape = 'square';
         this.unit_for_stats_change = {};
         this.last_id = {'ally': 0, 'enemy': 0};
         this.image = {
