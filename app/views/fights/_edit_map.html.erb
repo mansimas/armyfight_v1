@@ -48,7 +48,9 @@
 
       <div class='thumb'>
         <div id='items_grid'>
-          <%= render 'fights/images_list' %>
+          <% Image.all.each do |image| %>
+              <%= image_tag("/assets/images/#{image.name}", size: "50x50") %>
+          <% end %>
         </div>
       </div>
     </div>

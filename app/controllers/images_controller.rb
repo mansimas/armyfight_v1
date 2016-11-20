@@ -30,6 +30,7 @@ class ImagesController < ApplicationController
     image.upload(params)
 
     respond_to do |format|
+        format.html { render :edit }
         format.json { head :no_content }
     end
 
