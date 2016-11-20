@@ -6,3 +6,6 @@ li {
     width: 100px;
     margin-top: 5px;
 }
+.hovered:hover { 
+	cursor: pointer;
+}

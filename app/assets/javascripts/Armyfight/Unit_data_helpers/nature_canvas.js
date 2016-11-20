@@ -45,6 +45,19 @@ nature_canvas.factory('nature_canvas', [function () {
                   self.nat_ctx.fill();
 
                 }
+              } else {
+                var image = document.getElementById(shape);
+                for(var item = 0, len = x_y_array.length; item < len; item++) {
+                  var coord = x_y_array[item];
+                  var width = coord[2] * 10;
+                  self.nat_ctx.drawImage(
+                    image,
+                    coord[0] - self.drag_x - width/2,
+                    coord[1] - self.drag_y - width/2,
+                    width,
+                    width
+                  );
+                }
               }
             });
         });

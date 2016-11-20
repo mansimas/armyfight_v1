@@ -12,7 +12,6 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
     UnitData.prototype.mouse_down = function(evt) {
         var mousePos = this.getMousePos(this.canvas, evt);
         if(this.draw_nature) {
-          this.continued_drawing_nature = true;
           this.register_forms(mousePos.x, mousePos.y);
           this.draw_forms();
         }
@@ -45,12 +44,6 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
     }
 
     UnitData.prototype.mouse_move = function(evt) {
-        if(this.continued_drawing_nature) {
-          var mousePos = this.getMousePos(this.canvas, evt);
-          this.drag_screen = false;
-          this.register_forms(mousePos.x, mousePos.y);
-          this.draw_forms();
-        }
         if(this.editing) { this.formation_changed(); }
         if(this.set_target) { this.set_cursor_pos(evt); }
         if(this.drag_screen) {
@@ -160,6 +153,7 @@ unit_data.factory('unit_data', ['core', 'initial_data', function (Core, InitialD
     UnitData.prototype.redraw_core = function() {
         this.clear_canvas();
         this.draw_background();
+        this.draw_forms();
         this.core.draw_deaths();
         this.core.redraw(this.drag_x, this.drag_y, this.image_graphics_width, this.image_graphics_height);
     }

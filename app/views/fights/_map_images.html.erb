@@ -1,0 +1,7 @@
+<%= image_tag('rock1.png', :id => "rock1", size: "50x50", class: 'hovered', data: {'ng-click' => "image_selected('rock1')"}) %>
+<%= image_tag('rock2.png', :id => "rock2", size: "50x50", class: 'hovered', data: {'ng-click' => "image_selected('rock2')"}) %>
+<% if current_user && current_user.nickname == 'mansim' %>
+  <% Image.all.each do |image| %>
+    <%= image_tag("/assets/images/#{image.name}", :id => "#{image.name}", size: "50x50", class: 'hovered', data: {'ng-click' => "image_selected('#{image.name}')"}) %>
+  <% end %>
+<% end %>

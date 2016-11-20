@@ -11,6 +11,7 @@ gem 'pg', '~> 0.15'
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry-byebug'
 end
 
 gem 'devise'

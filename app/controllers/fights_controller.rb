@@ -18,7 +18,13 @@ class FightsController < ApplicationController
         targets.push([t.id, t.army_id, t.x, t.y, t.stay_time])
       end
     end
-    render :json => { :status => :ok, :fight => @fight.armies.as_json, :targets => targets.as_json, :name => @fight.name } 
+    render :json => { 
+      :status => :ok, 
+      :fight => @fight.armies.as_json, 
+      :targets => targets.as_json, 
+      :map_elements => @fight.map_elements.as_json, 
+      :name => @fight.name 
+    } 
   end
 
   def show_fight
@@ -30,6 +36,19 @@ class FightsController < ApplicationController
     if (@fight.user_id != current_user.id) && (current_user.nickname != 'mansim')
       redirect_to root_path
     end
+  end
+
+  def add_map_elements
+    params[:items].each do |item|
+      map_element = MapElement.new
+      map_element.fight_id = params[:fight_id]
+      map_element.color = item[0]
+      map_element.shape = item[1]
+      map_element.elements = item[2]
+      map_element.save!
+    end
+
+    render :json => { :status => :ok, :message => 'ok' }
   end
 
   def update_fight

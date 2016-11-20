@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :fights, :dependent => :destroy
+  validates :nickname, uniqueness: true
 end

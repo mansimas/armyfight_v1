@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get 'all_fights' => 'fights#all_fights'
     get "play/:id" => 'fights#play'
     post 'watched_fight' => 'fights#watched_fight'
+    post 'add_map_elements' => 'fights#add_map_elements'
 
     ## AJAX FOR TRNALSATIONS
     post 'delete_key' => 'translations#delete_key'

@@ -79,9 +79,9 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
         $scope.edit_army_view = function(number) { return number == $scope.army_view; }
         $scope.remove_target = function(key) { $scope.unit_for_stats_change.targets.splice(key, 1); }
         $scope.draw_shape = function(shape) { ud.drawing_shape = shape; }
+        $scope.image_selected = function(image) { ud.drawing_shape = image; }
         $scope.set_map_range = function() {
           ud.map_range = document.getElementsByName("map_range")[0].value;
-          console.log(ud.map_range);
         }
         $scope.draw_map = function(key) {
           ud.enable_nature_drawing();
@@ -208,8 +208,8 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
                 else {
                     ajax.delete_all_armies($scope.fight_id);
                     ajax.edit_fight($scope.fight_id, $scope.fight_name);
-
                     ajax.flush_armies_to_db($scope.formations, $scope.fight_id);
+                    ajax.flush_map_elements_to_db(ud.nature_coordinates, $scope.fight_id);
                 }
                 $scope.saved = true;
             } else {
@@ -233,6 +233,7 @@ ctrl.controller('game', ['$scope', '$interval', '$http', '$timeout', 'core', 'un
             ajax.get_armies($scope.fight_id, function(response){
                 $scope.fight_name = response.name;
                 $scope.formations = response.formations;
+                ud.nature_coordinates = response.map_elements;
             });
         }
 

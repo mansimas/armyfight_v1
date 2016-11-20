@@ -16,12 +16,16 @@ class ArmiesController < ApplicationController
   end
 
   def create
-    @army = Army.new
-    @army.create_army(params)
-    @army.save
-    @army.create_targets(params)
-    fight = @army.fight
-    fight.touch
+    params[:items].each_with_index do |val, index|
+      army = Army.new
+      army.create_army(val)
+      army.save
+      army.create_targets(val)
+      if index == 0
+        fight = army.fight
+        fight.touch
+      end
+    end
     render :json => { :status => :ok, :message => params }
   end
 

@@ -20,37 +20,40 @@
               Range: <input type="range" name='map_range' min='1' max='100' step='1' value='10' onchange='angular.element(this).scope().set_map_range();'>
           </div>
       </div>
-      <div class="row" style='padding-top:10px;'>
-          <div class='col-md-6'>
-              <button style='width:100%'  data-ng-click="draw_shape('square')" class="btn btn-default">
-                <%= r('homepage.fights.square') %>
-              </button>
-          </div>
-          <div class='col-md-6'>
-              <button style='width:100%'  data-ng-click="draw_shape('circle')" class="btn btn-default">
-                <%= r('homepage.fights.circle') %>
-              </button>
-          </div>
-      </div>
-      <div class="row" style='padding-top:50px;'>
-          <div class="col-md-12">
-            Upload your image:
-            <%= form_for(Image.new, html: { multipart: true, class: "dropzone", id: "dropzone"}) do |f| %>
-                <div class="fallback">
-                    <%= f.file_field :image %>
-                </div>
-            <% end %>
-          </div>
-      </div>
+      <% if current_user && current_user.nickname == 'mansim' %>
+        <div class="row" style='padding-top:50px;'>
+            <div class="col-md-12">
+              Upload your image:
+              <%= form_for(Image.new, html: { multipart: true, class: "dropzone", id: "dropzone"}) do |f| %>
+                  <div class="fallback">
+                      <%= f.file_field :image %>
+                  </div>
+              <% end %>
+            </div>
+        </div>
+      <% end %>
     </div>
     <div class='col-md-6'>
-      Select any from available images:
-
-      <div class='thumb'>
-        <div id='items_grid'>
-          <% Image.all.each do |image| %>
-              <%= image_tag("/assets/images/#{image.name}", size: "50x50") %>
-          <% end %>
+      <div class='row' style='padding-top:10px;'>
+          <div class='col-md-12'>
+          Select shape or image:
+          </div>
+      </div>
+      <div class='row' style='padding-top:10px;'>
+        <div class='col-md-6'>
+            <button style='width:100%'  data-ng-click="draw_shape('square')" class="btn btn-default">
+              <%= r('homepage.fights.square') %>
+            </button>
+        </div>
+        <div class='col-md-6'>
+            <button style='width:100%'  data-ng-click="draw_shape('circle')" class="btn btn-default">
+              <%= r('homepage.fights.circle') %>
+            </button>
+        </div>
+      </div>
+      <div class='row' style='padding-top:10px;'>
+        <div class='col-md-12'>
+          <%= render 'fights/map_images' %>
         </div>
       </div>
     </div>
